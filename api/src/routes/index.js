@@ -11,6 +11,7 @@ const routeDiets = require("./diets")
 
 const router = Router();
 
+//Trae el paso a paso de todas las recetas
 async function info(){
 
     let info = await axios(`https://api.spoonacular.com/recipes/complexSearch?apiKey=44a4d0c7b7564774918875cd3a176309&fbclid=IwAR3HLiWpD2qxmJl9ze9AtloOZSEtCprHf4OQV2is1laJiFCfZxcwarbd77A&addRecipeInformation=true`, 
@@ -44,9 +45,10 @@ async function info(){
     // return steps;
 }
 
+//Trae el paso a paso de una sola receta
 async function getInfoRecipe(id){
     let urlID = `https://api.spoonacular.com/recipes/${id}/information?apiKey=${apiUrl}`;
-    let info = await axios(`https://api.spoonacular.com/recipes/716426/information?apiKey=44a4d0c7b7564774918875cd3a176309&fbclid=IwAR3HLiWpD2qxmJl9ze9AtloOZSEtCprHf4OQV2is1laJiFCfZxcwarbd77A`, 
+    let info = await axios(`https://api.spoonacular.com/recipes/716426/information?apiKey=44a4d0c7b7564774918875cd3a176309&fbclid=IwAR3HLiWpD2qxmJl9ze9AtloOZSEtCprHf4OQV2is1laJiFCfZxcwarbd77A`,
         {
             headers: {"Accept-Encoding": "null"}
         }
@@ -55,8 +57,8 @@ async function getInfoRecipe(id){
     return steps;
 }
 
-info()
-// console.log(getInfoRecipe());
+// info()
+// getInfoRecipe().then(response => console.log(response))
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);

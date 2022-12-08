@@ -11,8 +11,23 @@ module.exports = (sequelize) => {
       primaryKey: true
     },
     name: {
-      type: DataTypes.STRING,
+      type: DataTypes.ENUM(
+        "Gluten Free",
+        "Ketogenic",
+        "Vegetarian",
+        "Lacto-Vegetarian",
+        "Ovo-Vegetarian",
+        "Vegan",
+        "Pescetarian",
+        "Paleo",
+        "Primal",
+        "Low FODMAP",
+        "WHOLE30"
+      ),
       allowNull: false,
+      // get(){
+      //   return `${this.getDataValue("name").toLowerCase()}`
+      // }
     },
   },{
     timestamps: false

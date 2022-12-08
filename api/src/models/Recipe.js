@@ -25,6 +25,9 @@ module.exports = (sequelize) => {
     stepAStep: {
       type: DataTypes.TEXT,
       allowNull: false
+    },
+    dietsTypes: {
+      type: DataTypes.TEXT,
     }
   },{
     timestamps: false
