@@ -1,29 +1,27 @@
 const { Router } = require('express');
 const axios = require("axios");
-const {apiUrl, Recipe, Diet} = require("../db");
+const { apiUrl, Recipe, Diet } = require("../db");
 let url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiUrl}&addRecipeInformation=true`;
-const routeRecipes = require("./recipes")
-const routeDiets = require("./diets")
 
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
-
-
+const routeRecipes = require("./recipes")
+const routeDiets = require("./diets");
 const router = Router();
 
 //Trae el paso a paso de todas las recetas
-async function info(){
+async function info() {
 
-    let info = await axios(`https://api.spoonacular.com/recipes/complexSearch?apiKey=44a4d0c7b7564774918875cd3a176309&fbclid=IwAR3HLiWpD2qxmJl9ze9AtloOZSEtCprHf4OQV2is1laJiFCfZxcwarbd77A&addRecipeInformation=true`, 
+    let info = await axios(`https://api.spoonacular.com/recipes/complexSearch?apiKey=44a4d0c7b7564774918875cd3a176309&fbclid=IwAR3HLiWpD2qxmJl9ze9AtloOZSEtCprHf4OQV2is1laJiFCfZxcwarbd77A&addRecipeInformation=true`,
         {
-            headers: {"Accept-Encoding": "null"}
+            headers: { "Accept-Encoding": "null" }
         }
     )
 
-    let steps = await info.data.results.map(recipe=>{
-        if(recipe.analyzedInstructions.length === 0){
+    let steps = await info.data.results.map(recipe => {
+        if (recipe.analyzedInstructions.length === 0) {
             recipe.analyzedInstructions[0] = {
-                name: "", 
+                name: "",
                 steps: [
                     {
                         number: "",
@@ -36,9 +34,9 @@ async function info(){
         }
 
         return recipe.analyzedInstructions[0].steps
-    }).map(steps=>steps.map(step=>step.step));
+    }).map(steps => steps.map(step => step.step));
     // console.log(info.data);
-    
+
 
 
     console.log(steps);
@@ -46,14 +44,14 @@ async function info(){
 }
 
 //Trae el paso a paso de una sola receta
-async function getInfoRecipe(id){
+async function getInfoRecipe(id) {
     let urlID = `https://api.spoonacular.com/recipes/${id}/information?apiKey=${apiUrl}`;
     let info = await axios(`https://api.spoonacular.com/recipes/716426/information?apiKey=44a4d0c7b7564774918875cd3a176309&fbclid=IwAR3HLiWpD2qxmJl9ze9AtloOZSEtCprHf4OQV2is1laJiFCfZxcwarbd77A`,
         {
-            headers: {"Accept-Encoding": "null"}
+            headers: { "Accept-Encoding": "null" }
         }
     )
-    let steps = await info.data.analyzedInstructions[0].steps.map(step=>step.step);
+    let steps = await info.data.analyzedInstructions[0].steps.map(step => step.step);
     return steps;
 }
 

@@ -3,7 +3,7 @@ const { DataTypes } = require('sequelize');
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define('diet', {
+  sequelize.define('Diet', {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -12,17 +12,18 @@ module.exports = (sequelize) => {
     },
     name: {
       type: DataTypes.ENUM(
-        "Gluten Free",
-        "Ketogenic",
-        "Vegetarian",
-        "Lacto-Vegetarian",
-        "Ovo-Vegetarian",
-        "Vegan",
-        "Pescetarian",
-        "Paleo",
-        "Primal",
-        "Low FODMAP",
-        "WHOLE30"
+        "gluten free",
+        "ketogenic",
+        "vegetarian",
+        "lacto vegetarian",
+        "ovo vegetarian",
+        "lacto ovo vegetarian",
+        "vegan",
+        "pescetarian",
+        "paleo",
+        "primal",
+        "low fodmap",
+        "whole 30"
       ),
       allowNull: false,
       // get(){

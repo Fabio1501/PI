@@ -16,10 +16,10 @@ module.exports = {
                 name: recipe.title,
                 dishSummary: recipe.summary,
                 healthScore: recipe.healthScore,
-                stepAStep: recipe.analyzedInstructions[0]?.steps.map(step=>step.step),
-                ingredients: recipe.analyzedInstructions[0]?.steps.map(step=>step.ingredients),
-                equipment: recipe.analyzedInstructions[0]?.steps.map(step=>step.equipment),
+                stepAStep: recipe.analyzedInstructions[0]?.steps?.map(step=>step.step),
                 dietsTypes: recipe.diets,
+                ingredients: recipe.analyzedInstructions[0]?.steps?.map(step=>step.ingredients?.map(ingredient => ingredient.name)),
+                equipment: recipe.analyzedInstructions[0]?.steps?.map(step=>step.equipment?.map(equipment=>equipment.name)),
                 img: recipe.image,
                 readyInMinutes: recipe.readyInMinutes,
                 servings: recipe.servings,
@@ -34,12 +34,14 @@ module.exports = {
         let infoOneRecipe = await axios(url, {
             headers: {"Accept-Encoding": "gzip,deflate,compress"}
         });
-        infoOneRecipe = infoOneRecipe.data
 
+        if (!infoOneRecipe) {
+            return undefined;
+        }
+        infoOneRecipe = infoOneRecipe.data
         return infoOneRecipe;
     },
-    addRecipe: async function(obj){
+    getDiets: async function(){
         
-    },
-    getDiets: async function(){}
+    }
 }
