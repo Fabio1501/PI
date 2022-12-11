@@ -7,7 +7,6 @@ module.exports = (sequelize) => {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
-      allowNull: false,
       primaryKey: true
     },
     name: {
@@ -24,11 +23,7 @@ module.exports = (sequelize) => {
         "primal",
         "low fodmap",
         "whole 30"
-      ),
-      allowNull: false,
-      // get(){
-      //   return `${this.getDataValue("name").toLowerCase()}`
-      // }
+      )
     },
   },{
     timestamps: false

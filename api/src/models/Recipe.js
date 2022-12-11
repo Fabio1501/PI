@@ -29,9 +29,6 @@ module.exports = (sequelize) => {
       allowNull: false,
       defaultValue: "Proximamente..."
     },
-    dietsTypes: {
-      type: DataTypes.TEXT,
-    },
     ingredients: {
       type: DataTypes.TEXT,
       defaultValue: "Proximamente..."
@@ -42,16 +39,18 @@ module.exports = (sequelize) => {
     },
     image: {
       type: DataTypes.STRING,
-      defaultValue: '',
+      defaultValue: 'soy una imagen',
     },
     readyInMinutes: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      defaultValue: 1
     },
     servings: {
       type: DataTypes.INTEGER
     },
-    ratingCount: {
-      type: DataTypes.FLOAT
+    aggregateLikes: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
     }
   },{
     timestamps: false

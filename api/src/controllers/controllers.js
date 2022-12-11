@@ -1,10 +1,11 @@
 const axios = require("axios");
 const {apiUrl} = require("../db");
 let url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiUrl}&addRecipeInformation=true`;
+const {Recipe, Diet} = require("../db");
 
 
 module.exports = {
-    getAllRecipes: async function(){
+    getDataApi: async function(name){
         let allDataApi = await axios(url, {
             headers: {"Accept-Encoding": "gzip,deflate,compress"}
         })
@@ -17,31 +18,149 @@ module.exports = {
                 dishSummary: recipe.summary,
                 healthScore: recipe.healthScore,
                 stepAStep: recipe.analyzedInstructions[0]?.steps?.map(step=>step.step),
-                dietsTypes: recipe.diets,
+                diets: recipe.diets,
                 ingredients: recipe.analyzedInstructions[0]?.steps?.map(step=>step.ingredients?.map(ingredient => ingredient.name)),
                 equipment: recipe.analyzedInstructions[0]?.steps?.map(step=>step.equipment?.map(equipment=>equipment.name)),
-                img: recipe.image,
+                image: recipe.image,
                 readyInMinutes: recipe.readyInMinutes,
                 servings: recipe.servings,
-                ratingCount: recipe.ratingCount
+                aggregateLikes: recipe.aggregateLikes
             }
         })
 
-        return data;
+        if(!name){
+          return data  
+        }
+
+        let filterApi = await data.filter(recipe => recipe.name.toLowerCase().includes(name.toLowerCase()));   
+        return filterApi;
     },
-    getRecipesForId: async function(id){
-        url = `https://api.spoonacular.com/recipes/${id}/information?apiKey=${apiUrl}`
+    getDataDb: async function(name){
+        let infoDb = await Recipe.findAll({
+            include: {
+                model: Diet,
+                attributes: ["name"],
+                through: {
+                    attributes: []
+                }
+            }
+        });
+        
+        if (!name) return infoDb;
+        
+        let filterDb = await Recipe.findAll({
+            where: {name},
+            include: {
+                model: Diet,
+                attributes: ["name"],
+                through: {
+                    attributes: []
+                }
+            },
+        })
+
+        if(filterDb.length === 0) return undefined;
+
+        return filterDb;
+    },
+    getRecipesForId: async function(idApi){
+        url = `https://api.spoonacular.com/recipes/${idApi}/information?apiKey=${apiUrl}`
         let infoOneRecipe = await axios(url, {
             headers: {"Accept-Encoding": "gzip,deflate,compress"}
         });
 
-        if (!infoOneRecipe) {
+        let {
+            id,
+            title,
+            summary,
+            healthScore,
+            analyzedInstructions,
+            diets,
+            image,
+            readyInMinutes,
+            servings,
+            aggregateLikes
+        } = infoOneRecipe.data;
+
+        let data = {
+                id,
+                name: title,
+                dishSummary: summary,
+                healthScore,
+                stepAStep: analyzedInstructions[0]?.steps?.map(step=>step.step),
+                diets,
+                ingredients: analyzedInstructions[0]?.steps?.map(step=>step.ingredients?.map(ingredient => ingredient.name)),
+                equipment: analyzedInstructions[0]?.steps?.map(step=>step.equipment?.map(equipment=>equipment.name)),
+                image,
+                readyInMinutes,
+                servings,
+                aggregateLikes
+        }
+
+        if (!data) {
             return undefined;
         }
-        infoOneRecipe = infoOneRecipe.data
-        return infoOneRecipe;
-    },
-    getDiets: async function(){
+
         
+        return data;
+
+    },
+    postDiets: async function(){
+        let diets = [
+            {name: "gluten free"},
+            {name: "ketogenic"},
+            {name: "vegetarian"},
+            {name: "lacto vegetarian"},
+            {name: "ovo vegetarian"},
+            {name: "lacto ovo vegetarian"},
+            {name: "vegan"},
+            {name: "pescetarian"},
+            {name: "paleo"},
+            {name: "primal"},
+            {name: "low fodmap"},
+            {name: "whole 30"}
+        ]
+
+        await Diet.bulkCreate(diets);
+    },
+    createdRelation: async function(body){
+        const {
+            name,
+            dishSummary, 
+            healthScore, 
+            diets,
+            stepAStep, 
+            ingredients,
+            equipment, 
+            image,
+            readyInMinutes, 
+            servings, 
+            aggregateLikes
+        } = body
+
+        if (!name || !dishSummary || !healthScore || !diets) {
+            throw new Error({error: "Faltan datos requeridos"})
+        }
+        
+        let recipeCreated = await Recipe.create({
+            name, 
+            dishSummary, 
+            healthScore,
+            stepAStep, 
+            ingredients,
+            equipment,
+            image,
+            readyInMinutes,
+            servings, 
+            aggregateLikes
+        });
+
+        let dietDb = await Diet.findAll({
+            where: {
+                name: diets
+            }
+        })
+
+        recipeCreated.addDiets(dietDb); 
     }
 }

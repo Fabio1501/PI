@@ -1,33 +1,30 @@
 const express = require('express');
-const { getAllRecipes, getRecipesForId } = require('../controllers/controllers');
+const { getDataApi, getRecipesForId, getDataDb, createdRelation } = require('../controllers/controllers');
 const router = express.Router();
-const {Recipe, Diet} = require("../db");
+const {Recipe} = require("../db");
 
 router.get("/", async (req, res)=>{
-    
     try {
         let {name} = req.query;       
-        let infoApi = await getAllRecipes();
-        let infoDb = await Recipe.findAll();
+        let infoApi = await getDataApi(name);
+        let infoDb = await getDataDb(name);
         
-        if (!name) {
-            res.send([...infoApi, ...infoDb])
-        }else{
-            let filterApi = await infoApi.filter(recipe => recipe.name === name);
-            let filterDb = await Recipe.findAll({
-                where: req.query
-            })
-
-            res.send([...filterApi, ...filterDb]);
+        if(!infoApi && !infoDb){
+            throw new Error({error: `No existe la receta ${name}`})
         }
-    } catch (error) {
-        res.status(404).send(error.message);
+        
+        res.send([...infoApi, ...infoDb]);
+    }
+    catch (error){
+        res.status(404).send(error);
     }
 });
 
 router.get("/:id", async (req, res)=>{
     try {
         let {id} = req.params;
+
+        
         if (String(Number(id)) === 'NaN'){
             let infoDb = await Recipe.findByPk(id);
             if (!infoDb) {
@@ -35,7 +32,7 @@ router.get("/:id", async (req, res)=>{
             }else{
                 res.send(infoDb);
             }
-        }{
+        }else{
             let infoApi = await getRecipesForId(id);
             if (!infoApi) {
                 throw new Error({error: `No existe la receta con ID: ${id}`})
@@ -44,23 +41,18 @@ router.get("/:id", async (req, res)=>{
             }
         }
     } catch (error) {
-        res.status(404).send(error);
+        res.status(404).send({error: error});
     }
 });
 
 router.post("/", async (req, res)=>{
     try {
-        const {name, dishSummary, healthScore, dietsTypes} = req.body
-        
-        if (!name || !dishSummary || !healthScore || !dietsTypes) {
-            throw new Error({error: "Faltan datos requeridos"})
-        }
-        
-        await Recipe.create(req.body);
-        res.send({success: "La receta fue creada con exito!"})
+        await createdRelation(req.body);
+
+        res.send({success: "La receta fue creada con exito!"});
     } catch (error) {
-        res.status(404).send(error.message);
+        res.status(404).send({error: error});
     }
-})
+});
 
 module.exports = router;
