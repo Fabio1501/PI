@@ -3,6 +3,46 @@ const {apiUrl} = require("../db");
 let url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiUrl}&addRecipeInformation=true`;
 const {Recipe, Diet} = require("../db");
 
+async function getRecipesForIdApi(idApi){
+    url = `https://api.spoonacular.com/recipes/${idApi}/information?apiKey=${apiUrl}`
+    let infoOneRecipe = await axios(url, {
+        headers: {"Accept-Encoding": "gzip,deflate,compress"}
+    });
+
+    let {
+        id,
+        title,
+        summary,
+        healthScore,
+        analyzedInstructions,
+        diets,
+        image,
+        readyInMinutes,
+        servings,
+        aggregateLikes
+    } = infoOneRecipe.data;
+
+    let data = {
+            id,
+            name: title,
+            dishSummary: summary,
+            healthScore,
+            stepAStep: analyzedInstructions[0]?.steps?.map(step=>step.step),
+            diets,
+            ingredients: analyzedInstructions[0]?.steps?.map(step=>step.ingredients?.map(ingredient => ingredient.name)),
+            equipment: analyzedInstructions[0]?.steps?.map(step=>step.equipment?.map(equipment=>equipment.name)),
+            image,
+            readyInMinutes,
+            servings,
+            aggregateLikes
+    }
+
+    if (!data) {
+        return undefined;
+    }
+
+    return data;
+}
 
 module.exports = {
     getDataApi: async function(name){
@@ -32,7 +72,7 @@ module.exports = {
           return data  
         }
 
-        let filterApi = await data.filter(recipe => recipe.name.toLowerCase().includes(name.toLowerCase()));   
+        let filterApi = await data.filter(recipe => recipe.name.toLowerCase().includes(name.toLowerCase()));
         return filterApi;
     },
     getDataDb: async function(name){
@@ -63,48 +103,6 @@ module.exports = {
 
         return filterDb;
     },
-    getRecipesForIdApi: async function(idApi){
-        url = `https://api.spoonacular.com/recipes/${idApi}/information?apiKey=${apiUrl}`
-        let infoOneRecipe = await axios(url, {
-            headers: {"Accept-Encoding": "gzip,deflate,compress"}
-        });
-
-        let {
-            id,
-            title,
-            summary,
-            healthScore,
-            analyzedInstructions,
-            diets,
-            image,
-            readyInMinutes,
-            servings,
-            aggregateLikes
-        } = infoOneRecipe.data;
-
-        let data = {
-                id,
-                name: title,
-                dishSummary: summary,
-                healthScore,
-                stepAStep: analyzedInstructions[0]?.steps?.map(step=>step.step),
-                diets,
-                ingredients: analyzedInstructions[0]?.steps?.map(step=>step.ingredients?.map(ingredient => ingredient.name)),
-                equipment: analyzedInstructions[0]?.steps?.map(step=>step.equipment?.map(equipment=>equipment.name)),
-                image,
-                readyInMinutes,
-                servings,
-                aggregateLikes
-        }
-
-        if (!data) {
-            return undefined;
-        }
-
-
-        return data;
-
-    },
     getRecipesForId: async function(id){
 
         if (String(Number(id)) === 'NaN'){
@@ -121,10 +119,10 @@ module.exports = {
             if (!infoDb) {
                 throw new Error({error: `No existe la receta con ID: ${id}`})
             }else{
-                return infoDb
+                return infoDb;
             }
         }else{
-            let infoApi = await getRecipesForId(id);
+            let infoApi = await getRecipesForIdApi(id);
             if (!infoApi) {
                 throw new Error({error: `No existe la receta con ID: ${id}`})
             }else{
