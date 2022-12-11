@@ -63,7 +63,7 @@ module.exports = {
 
         return filterDb;
     },
-    getRecipesForId: async function(idApi){
+    getRecipesForIdApi: async function(idApi){
         url = `https://api.spoonacular.com/recipes/${idApi}/information?apiKey=${apiUrl}`
         let infoOneRecipe = await axios(url, {
             headers: {"Accept-Encoding": "gzip,deflate,compress"}
@@ -101,9 +101,36 @@ module.exports = {
             return undefined;
         }
 
-        
+
         return data;
 
+    },
+    getRecipesForId: async function(id){
+
+        if (String(Number(id)) === 'NaN'){
+            let infoDb = await Recipe.findAll({
+                where: {id},
+                include: {
+                    model: Diet,
+                    attributes: ["name"],
+                    through: {
+                        attributes: []
+                    }
+                }
+            });
+            if (!infoDb) {
+                throw new Error({error: `No existe la receta con ID: ${id}`})
+            }else{
+                return infoDb
+            }
+        }else{
+            let infoApi = await getRecipesForId(id);
+            if (!infoApi) {
+                throw new Error({error: `No existe la receta con ID: ${id}`})
+            }else{
+                return infoApi;
+            }
+        }
     },
     postDiets: async function(){
         let diets = [
