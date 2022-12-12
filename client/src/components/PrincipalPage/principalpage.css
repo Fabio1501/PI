@@ -1,0 +1,44 @@
+/* .App{
+    text-align: start;
+} */
+
+.bg-image{
+    display: flex;
+    background-image: url('../../assets/Banana\ Pancake\ Cereal.jpeg');
+    width: 100vw;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size:100vw;
+    background-position: left;
+}
+
+.bg-color{
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--black-third-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+}
+
+.btn-home{
+    text-decoration: none;
+    font-size: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--main-first-color);
+    font-weight: 700;
+    width: 350px;
+    height: 70px;
+    background-color: var(--main-fifth-color);
+    padding: 10px;
+    border: 3px solid var(--main-first-color);
+    border-radius: 10px;
+}
+
+.title-pp{
+    color: var(--black-first-color);
+    font-size: 56px;
+}

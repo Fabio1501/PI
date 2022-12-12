@@ -37,7 +37,7 @@ module.exports = (sequelize) => {
     },
     image: {
       type: DataTypes.STRING,
-      defaultValue: 'soy una imagen',
+      defaultValue: 'https://i.postimg.cc/Jz2YtN6P/default-image-PI.png',
     },
     readyInMinutes: {
       type: DataTypes.INTEGER,
