@@ -21,12 +21,10 @@ module.exports = (sequelize) => {
     },
     healthScore: {
       type: DataTypes.FLOAT,
-      allowNull: false,
       defaultValue: 0
     },
     stepAStep: {
       type: DataTypes.TEXT,
-      allowNull: false,
       defaultValue: "Proximamente..."
     },
     ingredients: {
@@ -46,7 +44,8 @@ module.exports = (sequelize) => {
       defaultValue: 1
     },
     servings: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      defaultValue: 1
     },
     aggregateLikes: {
       type: DataTypes.INTEGER,

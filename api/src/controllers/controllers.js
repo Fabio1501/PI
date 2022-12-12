@@ -163,7 +163,7 @@ module.exports = {
             aggregateLikes
         } = body
 
-        if (!name || !dishSummary || !healthScore || !diets) {
+        if (!name || !dishSummary || !diets) {
             throw new Error({error: "Faltan datos requeridos"})
         }
         
