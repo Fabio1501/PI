@@ -15,8 +15,12 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: content-box;
-  font-family: 'Raleway', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: 'Raleway', 'Ubuntu', 'Oxygen',
+    'Roboto', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
 }
 
+h1, h2, h3, h4, h5, h6, p{
+  padding: 0;
+  margin: 0;
+}
