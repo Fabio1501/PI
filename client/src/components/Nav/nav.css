@@ -17,7 +17,28 @@
 }
 
 .logo img{
-    width: 200px;
+    width: 150px;
     height: 90px;
 }
 
+.links{
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.link{
+    text-decoration: none;
+    color: var(--main-first-color);
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.link:hover{
+    text-decoration: underline;
+}
+
+.link-home{
+    margin: 60px;
+}

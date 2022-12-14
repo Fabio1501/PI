@@ -1,0 +1,25 @@
+.filters-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dropdown{
+    margin-bottom: 80px;
+    width: 80%;
+    height: 40px;
+    border-radius: 15px;
+    border: 2px solid var(--main-first-color);
+    color: var(--main-first-color);
+    background-color: var(--black-fifth-color);
+}
+
+.dropdown option:first-child{
+    background-color: var(--main-first-color);
+    color: var(--black-fifth-color);
+}
+
+.dropdown option:hover{
+    background-color: var(--main-first-color);
+    color: var(--black-fifth-color);
+}

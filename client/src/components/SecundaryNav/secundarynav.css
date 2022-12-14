@@ -1,0 +1,13 @@
+.secundaryNav-container{
+    height: 150vh;
+    width: 25vw;
+    position: fixed;
+    top: 90px;
+    right: 0;
+    background-color: var(--main-fourth-color);
+    color: var(--main-first-color);
+}
+
+.secundaryNav-container h3{
+    font-size: 24px;
+}

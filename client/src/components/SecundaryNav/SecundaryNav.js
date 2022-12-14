@@ -4,7 +4,7 @@ import './secundarynav.css';
 
 const SecundaryNav = () => {
     return(
-        <div className="secundaryNav-container">
+        <div className="secundary-nav secundaryNav-container">
             <h3>Filter by: </h3>
             <Filters/>
         </div>

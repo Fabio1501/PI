@@ -31,13 +31,9 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
       defaultValue: "Proximamente..."
     },
-    equipment: {
-      type: DataTypes.TEXT,
-      defaultValue: "Proximamente..."
-    },
-    image: {
+    image:{
       type: DataTypes.STRING,
-      defaultValue: 'https://i.postimg.cc/Jz2YtN6P/default-image-PI.png',
+      defaultValue: "https://i.postimg.cc/Jz2YtN6P/default-image-PI.png",
     },
     readyInMinutes: {
       type: DataTypes.INTEGER,
@@ -46,10 +42,6 @@ module.exports = (sequelize) => {
     servings: {
       type: DataTypes.INTEGER,
       defaultValue: 1
-    },
-    aggregateLikes: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0
     }
   },{
     timestamps: false

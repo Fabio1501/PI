@@ -1,0 +1,24 @@
+.recipes-container{
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: auto auto auto;
+    grid-template-columns: 75% 25%;
+    grid-template-areas: 
+    "nav nav"
+    "cards-container secundary-nav";
+}
+
+.nav{
+    grid-area: nav;
+    position: sticky;
+    top: 0;
+}
+
+.cards-container{
+    grid-area: cards-container;
+}
+
+.secundary-nav{
+    grid-area: secundary-nav;
+}

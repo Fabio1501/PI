@@ -7,17 +7,17 @@ import './nav.css';
 
 const Nav = () => {
     return (
-        <div className="container-nav">
+        <div className="container-nav nav">
             <Link to = '/' className="logo"> 
                 <img src={logo}/>
             </Link>
             <SearchBar/>
             <div className="links">
                 <Link to = '/recipes' 
-                    className="link-home"
+                    className="link link-home"
                 >Home</Link>
                 <Link to = '/recipes/create'  
-                    className="link-create"
+                    className="link link-create"
                 >Create Recipe</Link>
             </div>
         </div>
