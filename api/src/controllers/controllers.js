@@ -31,7 +31,7 @@ async function getRecipesForIdApi(idApi){
             diets,
             ingredients: analyzedInstructions[0]?.steps?.map(step=>step.ingredients?.map(ingredient => ingredient.name)),
             equipment: analyzedInstructions[0]?.steps?.map(step=>step.equipment?.map(equipment=>equipment.name)),
-            image,
+            img: image,
             readyInMinutes,
             servings,
             aggregateLikes
@@ -61,7 +61,7 @@ module.exports = {
                 diets: recipe.diets,
                 ingredients: recipe.analyzedInstructions[0]?.steps?.map(step=>step.ingredients?.map(ingredient => ingredient.name)),
                 equipment: recipe.analyzedInstructions[0]?.steps?.map(step=>step.equipment?.map(equipment=>equipment.name)),
-                image: recipe.image,
+                img: recipe.image,
                 readyInMinutes: recipe.readyInMinutes,
                 servings: recipe.servings,
                 aggregateLikes: recipe.aggregateLikes
@@ -157,7 +157,7 @@ module.exports = {
             stepAStep, 
             ingredients,
             equipment, 
-            image,
+            img,
             readyInMinutes, 
             servings, 
             aggregateLikes
@@ -174,7 +174,7 @@ module.exports = {
             stepAStep, 
             ingredients,
             equipment,
-            image,
+            img,
             readyInMinutes,
             servings, 
             aggregateLikes

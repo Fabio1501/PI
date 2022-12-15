@@ -7,8 +7,8 @@ const PrincipalPage = () => {
         <div className="bg-image">
             <div className="bg-black-color">
                 <div className="bg-color">
-                    <h1 className="title-pp">PI food - Fabian Carabajal</h1>
-                    <h2 className="subtitle-pp">The healthiest food can also be the most delicious.</h2>
+                    <h1 className="title-pp">The healthiest food can also be the most delicious.</h1>
+                    <h2 className="subtitle-pp">PI food - Fabian Carabajal</h2>
                     <Link to = '/recipes' className="btn-home">GO TO HOME</Link>
                 </div>
             </div>

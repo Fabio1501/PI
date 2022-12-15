@@ -22,7 +22,7 @@ function App(){
           element = {<Recipes/>}
         />
 
-        <Route
+        {/* <Route
           exact
           path='/recipes/:id'
           element = {<RecipeDetails/>}
@@ -32,7 +32,7 @@ function App(){
           exact
           path='/recipes/create'
           element = {<RecipeCreate/>}
-        />
+        /> */}
       </Routes>
     </div>
   );

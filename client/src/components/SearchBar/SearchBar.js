@@ -2,10 +2,12 @@ import React from "react";
 import iconSearch from '../../assets/icon search.svg'
 import './searchbar.css'
 
+
+
 const SearchBar = () => {
     return( 
         <div className="wrap">
-            <form className="search">
+            <form className="search" /*onSubmit={}*/>
                 <input type="text" className="searchRecipe" placeholder="Search recipes..."/>
                 <button type="submit" className="searchButton">
                     <img src={iconSearch}/>

@@ -31,7 +31,7 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
       defaultValue: "Proximamente..."
     },
-    image:{
+    img:{
       type: DataTypes.STRING,
       defaultValue: "https://i.postimg.cc/Jz2YtN6P/default-image-PI.png",
     },

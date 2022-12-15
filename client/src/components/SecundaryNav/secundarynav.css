@@ -4,8 +4,10 @@
     position: fixed;
     top: 90px;
     right: 0;
-    background-color: var(--main-fourth-color);
+    z-index: -1;
+    background-color: var(--main-third-color);
     color: var(--main-first-color);
+    /* margin-left: .5em; */
 }
 
 .secundaryNav-container h3{
