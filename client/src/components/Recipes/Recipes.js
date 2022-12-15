@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import Nav from '../Nav/Nav';
 import SecundaryNav from '../SecundaryNav/SecundaryNav';
@@ -16,7 +16,7 @@ const Recipes = () => {
     },[])
 
     return (
-        <div className="recipes-container">
+        <div className="recipes-container scrollbar" id="style-3">
             <Nav />
             <div className="cards-container">
                 {   !recipes ? <h2>Loading</h2> : recipes.map(recipe => {
@@ -25,7 +25,7 @@ const Recipes = () => {
                         img = {recipe.img}
                         name = {recipe.name}
                         healthScore = {recipe.healthScore}
-                        diets = {recipe.diets || recipe.Diets}
+                        diets = {!recipe.diets? recipe.Diets.map(diet=>diet.name) : recipe.diets}
                         key = {recipe.id}
                     />
                 })

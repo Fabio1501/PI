@@ -7,7 +7,24 @@
     grid-template-areas: 
     "nav nav"
     "cards-container secundary-nav";
-    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+#style-3::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: var(--main-fourth-color);
+}
+
+#style-3::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #F5F5F5;
+}
+
+#style-3::-webkit-scrollbar-thumb
+{
+	background-color: var(--main-first-color);
 }
 
 .nav{

@@ -99,8 +99,6 @@ module.exports = {
             },
         })
 
-        if(filterDb.length === 0) return undefined;
-
         return filterDb;
     },
     getRecipesForId: async function(id){

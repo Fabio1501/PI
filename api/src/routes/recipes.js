@@ -8,6 +8,12 @@ router.get("/", async (req, res)=>{
         let infoApi = await getDataApi(name);
         let infoDb = await getDataDb(name);
         
+        // console.log(infoDb.Diets.map(diet => diet.name));
+
+        // infoDb = {
+        //     diets: infoDb.Diets.map(diet => diet.name)
+        // }
+
         if(!infoApi && !infoDb){
             throw new Error({error: `No existe la receta ${name}`})
         }

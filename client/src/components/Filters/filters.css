@@ -12,6 +12,7 @@
     border: 2px solid var(--main-first-color);
     color: var(--main-first-color);
     background-color: var(--black-fifth-color);
+    cursor: pointer;
 }
 
 .dropdown option:first-child{

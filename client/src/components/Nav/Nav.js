@@ -6,7 +6,7 @@ import './nav.css';
 
 
 const Nav = () => {
-    return (
+    return(
         <div className="container-nav nav">
             <Link to = '/' className="logo"> 
                 <img src={logo}/>
