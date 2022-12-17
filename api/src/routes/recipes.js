@@ -40,6 +40,20 @@ router.get("/db",async (req, res)=>{
     }
 })
 
+router.get("/api",async (req, res)=>{
+    try {
+        let infoApi = await getDataApi();
+
+        if(!infoApi){
+            throw new Error({error: `No existe ninguna receta en la Api`})
+        }
+        
+        res.send(infoApi)
+    } catch (error) {
+        res.status(404).send({error});
+    }
+})
+
 router.get("/:id", async (req, res)=>{
     try {
         let {id} = req.params;        

@@ -4,7 +4,9 @@ const router = express.Router();
 
 router.get("/", async (req, res)=>{
     try {
-        let allDiets = await Diet.findAll();
+        let allDiets = await Diet.findAll({
+            attributes: ['name']
+        });
 
         if (!allDiets) {
             throw new Error({error: "No hay ninguna receta"})

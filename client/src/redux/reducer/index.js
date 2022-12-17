@@ -1,8 +1,9 @@
-import {GET_ALL_RECIPES, GET_RECIPE_DETAILS, GET_RECIPES_DB, GET_RECIPES_API, GET_RECIPES_AZ, GET_RECIPES_ZA} from '../utils'
+import {GET_ALL_RECIPES, GET_RECIPE_DETAILS, GET_RECIPES_FILTERS, GET_ALL_DIETS} from '../utils'
 
 const initialState = {
     recipes: [],
-    recipesDetails: []
+    recipesDetails: [],
+    diets: []
 }
 
 const rootReducer = (state = initialState, action)=>{
@@ -13,6 +14,16 @@ const rootReducer = (state = initialState, action)=>{
                 recipes: action.payload
             }
     
+        case GET_RECIPES_FILTERS:
+            return{
+                ...state,
+                recipes: action.payload
+            }
+        case GET_ALL_DIETS:
+            return{
+                ...state,
+                diets: action.payload
+            }    
         default:
             return state;
     }

@@ -5,6 +5,7 @@ import SecundaryNav from '../SecundaryNav/SecundaryNav';
 import Paginate from "../Paginate/Paginate";
 import RecipeCard from "../RecipeCard/RecipeCard";
 import { getAllRecipes } from '../../redux/actions/index';
+import loader from '../../assets/loader food.gif';
 import './recipes.css';
 
 const Recipes = () => {
@@ -12,20 +13,25 @@ const Recipes = () => {
     const dispatch = useDispatch();
 
     useEffect(()=>{
-        dispatch(getAllRecipes())
+        dispatch(getAllRecipes());
     },[])
 
     return (
         <div className="recipes-container scrollbar" id="style-3">
             <Nav />
             <div className="cards-container">
-                {   !recipes ? <h2>Loading</h2> : recipes.map(recipe => {
+                {   
+                !recipes.length ? 
+                setTimeout(() => {
+                    return <img src={loader}/>
+                }, 10000): 
+                recipes.map(recipe => {
                     return <RecipeCard
                         id = {recipe.id}
                         img = {recipe.img}
                         name = {recipe.name}
                         healthScore = {recipe.healthScore}
-                        diets = {!recipe.diets? recipe.Diets.map(diet=>diet.name) : recipe.diets}
+                        diets = {!recipe.diets ? recipe.Diets.map(diet=>diet.name) : recipe.diets}
                         key = {recipe.id}
                     />
                 })

@@ -46,7 +46,7 @@ async function getRecipesForIdApi(idApi){
 
 module.exports = {
     getDataApi: async function(name){
-        let allDataApi = await axios(url, {
+        let allDataApi = await axios(`${url}&number=100`, {
             headers: {"Accept-Encoding": "gzip,deflate,compress"}
         })
         allDataApi = allDataApi.data.results;

@@ -13,7 +13,7 @@
     display: block;
     text-decoration: none;
     width: 250px;
-    height: 90px;
+    height: auto;
 }
 
 .logo img{

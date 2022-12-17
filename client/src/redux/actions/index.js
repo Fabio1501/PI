@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {GET_ALL_RECIPES, GET_RECIPE_DETAILS, GET_RECIPES_DB, GET_RECIPES_API, GET_RECIPES_AZ, GET_RECIPES_ZA} from '../utils'
+import {GET_ALL_RECIPES, GET_ALL_DIETS, GET_RECIPE_DETAILS, GET_RECIPES_FILTERS} from '../utils'
 
 export const getAllRecipes = (name) => {
     return async (dispatch)=>{
@@ -22,3 +22,71 @@ export const getAllRecipes = (name) => {
 
     }
 }
+
+export const getAllDiets = () => async (dispatch) => {
+    let diets = await axios('http://localhost:3001/diets');
+    return await dispatch({
+        type: GET_ALL_DIETS,
+        payload: diets.data
+    })
+}
+
+const filterDb = async (option) => {
+    if (option === 'DB') {
+        let recipesDb = await axios(`http://localhost:3001/recipes/db`);
+        return await recipesDb.data;
+    }
+
+    let recipesApi = await axios(`http://localhost:3001/recipes/api`);
+    return await recipesApi.data;
+}
+
+const filterAlphabetical = async (option, info) => {
+    if (option === 'A-Z') {
+        info = await info.data.sort((a,b)=>a.name.localeCompare(b.name));
+        return info;
+    }
+
+    info = await info.data.sort((a,b)=>b.name.localeCompare(a.name));
+    return info;
+}
+
+const filterHealth = async (option, info) => {
+    if (option === 'menor-mayor') {
+        info = await info.data.sort((a,b)=>a.healthScore - b.healthScore);
+        return info;
+    }
+
+    info = await info.data.sort((a,b)=>b.healthScore - a.healthScore);
+    return info;
+}
+
+const filterDiets = async (option, info) => {
+
+}
+
+export const filterSelect = (select, option) => {
+    console.log(`select: ${select} \n option: ${option}`);
+    return async (dispatch) => {
+        let allData = await axios('http://localhost:3001/recipes')
+        let info;
+            switch (select){
+                case 'recipes-all-select':
+                    info = await filterDb(option);
+                    break;
+                case 'recipes-alphabetical-select':
+                    info = await filterAlphabetical(option, allData);
+                    break;
+                case 'recipes-health-select':
+                    info = await filterHealth(option, allData);
+                    break;
+                default:
+                    info = await filterDiets(option, allData);
+                    break;
+            }   
+        return await dispatch({
+            type: GET_RECIPES_FILTERS,
+            payload: info
+        })
+    }
+} 
