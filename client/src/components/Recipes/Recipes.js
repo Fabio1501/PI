@@ -22,9 +22,7 @@ const Recipes = () => {
             <div className="cards-container">
                 {   
                 !recipes.length ? 
-                setTimeout(() => {
-                    return <img src={loader}/>
-                }, 10000): 
+                <img src={loader}/>: 
                 recipes.map(recipe => {
                     return <RecipeCard
                         id = {recipe.id}

@@ -26,13 +26,13 @@ function App(){
           exact
           path='/recipes/:id'
           element = {<RecipeDetails/>}
-        />
+        /> */}
 
         <Route
           exact
           path='/recipes/create'
           element = {<RecipeCreate/>}
-        /> */}
+        />
       </Routes>
     </div>
   );
