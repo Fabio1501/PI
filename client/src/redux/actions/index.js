@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {GET_ALL_RECIPES, GET_ALL_DIETS, GET_RECIPE_DETAILS, GET_RECIPES_FILTERS} from '../utils'
+import {GET_ALL_RECIPES, GET_ALL_DIETS, GET_RECIPE_DETAILS, GET_RECIPES_FILTERS, GET_PAGE_RECIPES} from '../utils'
 
 export const getAllRecipes = (name) => {
     return async (dispatch)=>{
@@ -62,7 +62,19 @@ const filterHealth = async (option, info) => {
 }
 
 const filterDiets = async (option, info) => {
+    info = await info.data.filter((recipe) => {
+        if(!recipe.diets){
+            for(let recip of recipe.Diets){
+                if(recip === option) return true;
+            }
+        }
 
+        for(let recip of recipe.diets){
+            if(recip === option) return true;
+        }
+    })
+
+    return info;
 }
 
 export const filterSelect = (select, option) => {
@@ -90,3 +102,11 @@ export const filterSelect = (select, option) => {
         })
     }
 } 
+
+export const pageForPaginate = (numberPage) => async (dispatch) => {
+    
+    return await dispatch({
+        type: GET_PAGE_RECIPES,
+        payload: cardsPerPage
+    })
+}

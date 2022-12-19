@@ -6,6 +6,7 @@ import Paginate from "../Paginate/Paginate";
 import RecipeCard from "../RecipeCard/RecipeCard";
 import { getAllRecipes } from '../../redux/actions/index';
 import loader from '../../assets/loader food.gif';
+import errorReceta from '../../assets/error-recetas.webp'
 import './recipes.css';
 
 const Recipes = () => {
@@ -14,7 +15,20 @@ const Recipes = () => {
 
     useEffect(()=>{
         dispatch(getAllRecipes());
+        loading();
     },[])
+
+    function loading() {
+        const $loader = document.querySelector('.cards-container .loader-error .visible');
+        const $error = document.querySelector('.cards-container .loader-error .none');
+
+        setTimeout(() => {
+            $loader.classList.remove("visible");
+            $loader.classList.add("none");
+            $error.classList.remove("none");
+            $error.classList.add("visible");
+        }, 7000);
+    }
 
     return (
         <div className="recipes-container scrollbar" id="style-3">
@@ -22,7 +36,16 @@ const Recipes = () => {
             <div className="cards-container">
                 {   
                 !recipes.length ? 
-                <img src={loader}/>: 
+                <div className="loader-error">
+                    <img className="loader visible" src={loader}/>
+                    <div className="error none">
+                        <img src={errorReceta}/>
+                        <div className="text-error">
+                            <h3>ERROR 404: NOT FOUND</h3>
+                            <p>LO SENTIMOS! No pudimos encontrar tu receta 😔</p>
+                        </div>
+                    </div>
+                </div>: 
                 recipes.map(recipe => {
                     return <RecipeCard
                         id = {recipe.id}

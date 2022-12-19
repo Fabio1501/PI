@@ -9,23 +9,10 @@ const Filters = () => {
 
     useEffect(()=>{
         dispatch(getAllDiets());
-        addClick();
-    }, [])
+        addChange();
+    }, []);
 
-    const addClick = () => {
-        // const $selects = document.querySelectorAll('.filters-container select');
-        // console.log('soy una node list');
-        // for (let i = 0; i < $selects.length; i++) {
-        //     console.log('options', i);
-        //     console.log($selects[i].children);
-        //     for (let j = 0; j < $selects[i].children.length; j++) {
-        //         console.log('option: ', i , $selects[i].children[j]);
-        //         $selects[i].children[j].addEventListener('click', e=>{
-        //             console.log('estoy en options');
-        //         })
-        //     }
-        // }
-        
+    const addChange = () => {
         document.addEventListener('change', e =>{
             if (e.target.matches('.filters-container select')){
                 dispatch(filterSelect(e.target.id, e.target.value))
@@ -49,7 +36,9 @@ const Filters = () => {
                 <option value="">Diets</option>
                 {
                     diets.map(diet=>{
-                        return <option value={diet.name}>{`${diet.name.charAt(0).toUpperCase()}${diet.name.slice(1)}`}</option>
+                        return <option 
+                        value={diet.name} 
+                        key = {diet.name}>{`${diet.name.charAt(0).toUpperCase()}${diet.name.slice(1)}`}</option>
                     })
                 }
             </select>

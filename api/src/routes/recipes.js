@@ -7,22 +7,17 @@ router.get("/", async (req, res)=>{
         let {name} = req.query;       
         let infoApi = await getDataApi(name);
         let infoDb = await getDataDb(name);
-        
-        // console.log(infoDb.Diets.map(diet => diet.name));
-
-        // infoDb = {
-        //     diets: infoDb.Diets.map(diet => diet.name)
-        // }
 
         if(!infoApi && !infoDb){
             throw new Error({error: `No existe la receta ${name}`})
         }
-        
+
         res.send([...infoApi, ...infoDb]);
     }
     catch (error){
         res.status(404).send({error});
     }
+    
 });
 
 //Filtro para traer todas las recetas solamente de la DB
