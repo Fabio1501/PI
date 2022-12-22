@@ -1,24 +1,57 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import { useDispatch, useSelector } from 'react-redux';
+import loader from '../../assets/loader food.gif';
+import errorReceta from '../../assets/error-recetas.webp'
 import Nav from '../Nav/Nav';
 import SecundaryNav from '../SecundaryNav/SecundaryNav';
 import Paginate from "../Paginate/Paginate";
 import RecipeCard from "../RecipeCard/RecipeCard";
 import { getAllRecipes } from '../../redux/actions/index';
-import loader from '../../assets/loader food.gif';
-import errorReceta from '../../assets/error-recetas.webp'
 import './recipes.css';
 
+// function addRecipesByPage(){
+//     let cantPages = [];
+//     let nroPages = 12;
+
+//     for (let i = 0; i < nroPages; i++) {
+//         cantPages.push(i);
+//     }
+
+//     return cantPages;
+// }
+
 const Recipes = () => {
-    const recipes = useSelector(state => state.recipes);
+    const recipesPerPage = 9;
+    const recipesGlobal = useSelector(state => state.recipes);
+    const recipesLocal = recipesGlobal;
+    const [currentPage, setCurrentPage] = useState(1);
+    // const cantPages = addRecipesByPage();
+    // const recipesPage = useSelector(state => state.recipesPage);
     const dispatch = useDispatch();
 
     useEffect(()=>{
         dispatch(getAllRecipes());
-        loading();
-    },[])
+        // setRecipesLocal(recipesGlobal);
+        // addRecipesByPage();
+        
+        console.log(recipesLocal, recipesGlobal);
+    }, []);
+    
+    useEffect(()=>{
+        if (!recipesGlobal.length) {
+            loading();
+        }
+    }, [recipesGlobal]);
 
-    function loading() {
+    const indexLastRecipes = currentPage * recipesPerPage;
+    const indexFirstRecipes = indexLastRecipes - recipesPerPage;
+    const currentRecipes = recipesLocal.slice(indexFirstRecipes, indexLastRecipes);
+
+    function paginate(pageNumber){
+        setCurrentPage(pageNumber)
+    }
+
+    function loading(){
         const $loader = document.querySelector('.cards-container .loader-error .visible');
         const $error = document.querySelector('.cards-container .loader-error .none');
 
@@ -35,18 +68,18 @@ const Recipes = () => {
             <Nav />
             <div className="cards-container">
                 {   
-                !recipes.length ? 
+                !currentRecipes.length || !recipesGlobal.length ? 
                 <div className="loader-error">
                     <img className="loader visible" src={loader}/>
                     <div className="error none">
                         <img src={errorReceta}/>
                         <div className="text-error">
                             <h3>ERROR 404: NOT FOUND</h3>
-                            <p>LO SENTIMOS! No pudimos encontrar tu receta 😔</p>
+                            <p>LO SENTIMOS! No pudimos encontrar tu/s receta/s 😔</p>
                         </div>
                     </div>
                 </div>: 
-                recipes.map(recipe => {
+                currentRecipes.map(recipe => {
                     return <RecipeCard
                         id = {recipe.id}
                         img = {recipe.img}
@@ -58,7 +91,7 @@ const Recipes = () => {
                 })
                 }
                 <div className="paginate-container">
-                    <Paginate/>
+                    <Paginate recipesPerPage={recipesPerPage} totalRecipes = {recipesLocal.length} paginate = {paginate}/>
                 </div>
             </div>
             <SecundaryNav/>

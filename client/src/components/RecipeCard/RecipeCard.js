@@ -1,4 +1,6 @@
 import React from "react";
+// import {connect} from "react-redux";
+// import { getRecipeDetails } from "../../redux/actions";
 import { Link } from "react-router-dom";
 import './recipecard.css';
 
@@ -11,7 +13,10 @@ export default class RecipeCard extends React.Component{
 
     render(){
         return(
-            <Link className="card" to={`recipes/${this.props.id}`}>
+            <Link 
+            className="card" 
+            to={`/recipes/${this.props.id}`}
+            >
                 <img src={this.props.img} alt = {this.props.name}/>
                 <h2>{this.props.name}</h2>
                 <div className="attributes-values">
@@ -32,3 +37,5 @@ export default class RecipeCard extends React.Component{
         )
     }
 }
+
+// export default connect(mapDispatchToProps, {getRecipeDetails})(RecipeCard);

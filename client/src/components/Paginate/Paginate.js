@@ -1,58 +1,73 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { pageForPaginate } from "../../redux/actions";
+import { pageForArrows, pageForPaginate } from "../../redux/actions";
 import './paginate.css';
 
-const Paginate = () => {
-    const [currentPage, setCurrentPage] = useState(1);
-    const [cantPages, setCantPages] = useState([])
-    const recipes = useSelector(state => state.recipes);
-    const dispatch = useDispatch();
-    let nroPages = Math.ceil(recipes.length / 9);
+const Paginate = ({recipesPerPage, totalRecipes, paginate}) => {
+    // const dispatch = useDispatch();
+    const pageNumbers = [];
 
-
-    useEffect(()=>{
-        addRecipesByPage();
-    }, [])
-
-    function addRecipesByPage(){
-        //page 1 recipes.slice(0,9)
-        //page 2 recipes.slice(9,18)
-        //for(i=0; i<nroPages; i++) <button>{i++}</button>
-        let recipesPerPage = []; //Array de arrays 
-        // let backArrow = []; 
-        // let nextArrow = [];
-        // let acum = 0;
-        for (let i = 1; i < nroPages+1; i++) {
-            // recipesPerPage.push(recipes.slice(acum, acum + 9))
-            // backArrow = backArrow.push(...recipes.slice(acum-9 > 0 ? acum-9 : 0 , acum > 0 ? acum : 0));
-            // nextArrow = nextArrow.push(...recipes.slice(acum+9, acum+18))
-                
-            // if (i === 1) {
-            //     backArrow = [];
-            // }
-
-            // if (i === nroPages ) {
-            //     nextArrow = [];
-            // }
-            acum = acum + 9;
-            recipesPerPage.push(i);
-        }
-        setCantPages(recipesPerPage);
+    for (let i = 1; i <= Math.ceil(totalRecipes/recipesPerPage); i++) {
+        pageNumbers.push(i);
     }
+    // let nroPages = Math.ceil(recipes.length / 9);
+    // const cantPages = [];
+    // let nroPages = 12;
+
+    // for (let i = 0; i < nroPages; i++) {
+    //     cantPages.push(i);
+    // }
+    // useEffect(()=>{
+    //     addRecipesByPage();
+    // }, [])
+
+    // function addRecipesByPage(){
+    //     console.log(cantPages, nroPages);
+    //     for (let i = 0; i < nroPages; i++) {
+    //         cantPages.push(i);
+    //     }
+    // }
+
+    // function handleClickPages(page, recipes){
+    //     setCurrentPage(page);
+    //     dispatch(pageForPaginate(page, recipes));
+    // }
+
+    // function handleClickArrows(page, recipes, target){
+    //     if (target.className === 'btn-back') {
+    //         setCurrentPage(page-1);
+    //     }
+    //     setCurrentPage(page+1);
+        
+    //     dispatch(pageForArrows(page, recipes));
+    // }
 
     return(
         <div className="paginate-container">
-            <button>🡨</button>
-            {   
+            {/* <button className="btn-back"
+            onClick={e => handleClickArrows(currentPage, recipes, e.target)}>🡨</button> */}
+            {/* {   
                 cantPages.map(page => {
-                    return <button 
-                    id = {page}  
-                    onClick={dispatch(pageForPaginate(page))} 
-                    key = {page}>{page}</button>
+                    return <button
+                        className="btn-pages" 
+                        id = {page+1}  
+                        onClick={()=>handleClickPages(page, recipes)} 
+                        key = {page+1}
+                        >{page+1}</button>
+                })
+            } */}
+            {   
+                pageNumbers.map(page => {
+                    return <button
+                        className="btn-pages" 
+                        id = {page}  
+                        onClick={()=>paginate(page)} 
+                        key = {page}
+                        >{page}</button>
                 })
             }
-            <button>🡪</button>
+            {/* <button className="btn-next"
+            onClick={e => handleClickArrows(currentPage, recipes, e.target)}>🡪</button> */}
         </div>
     )
 }

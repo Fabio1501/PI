@@ -2,8 +2,9 @@ import {GET_ALL_RECIPES, GET_RECIPE_DETAILS, GET_RECIPES_FILTERS, GET_ALL_DIETS,
 
 const initialState = {
     recipes: [],
-    recipesDetails: [],
-    diets: []
+    recipeDetails: [],
+    diets: [],
+    recipesPage: []
 }
 
 const rootReducer = (state = initialState, action)=>{
@@ -26,7 +27,12 @@ const rootReducer = (state = initialState, action)=>{
         case GET_PAGE_RECIPES:
             return{
                 ...state,
-                recipes: action.payload
+                recipesPage: action.payload
+            }
+        case GET_RECIPE_DETAILS:
+            return{
+                ...state,
+                recipeDetails: action.payload
             }              
         default:
             return state;

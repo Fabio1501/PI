@@ -22,11 +22,11 @@ function App(){
           element = {<Recipes/>}
         />
 
-        {/* <Route
+        <Route
           exact
           path='/recipes/:id'
           element = {<RecipeDetails/>}
-        /> */}
+        />
 
         <Route
           exact

@@ -3,9 +3,6 @@ import {GET_ALL_RECIPES, GET_ALL_DIETS, GET_RECIPE_DETAILS, GET_RECIPES_FILTERS,
 
 export const getAllRecipes = (name) => {
     return async (dispatch)=>{
-        // let recipes = await axios('http://localhost:3001/recipes',
-        // {headers: {"Accept-Encoding": "gzip,deflate,compress"}}
-        // );
         if(!name){
             let recipes = await axios('http://localhost:3001/recipes');
             return await dispatch({
@@ -19,8 +16,16 @@ export const getAllRecipes = (name) => {
                 type: GET_ALL_RECIPES,
                 payload: recipes.data
             })
-
     }
+}
+
+export const getRecipeDetails = (id) => async (dispatch) => {
+    let recipes = await axios(`http://localhost:3001/recipes?id=${id}`);
+
+    return await dispatch({
+        type: GET_RECIPE_DETAILS,
+        payload: recipes.data
+    })
 }
 
 export const getAllDiets = () => async (dispatch) => {
@@ -103,10 +108,47 @@ export const filterSelect = (select, option) => {
     }
 } 
 
-export const pageForPaginate = (numberPage) => async (dispatch) => {
+// export const pageForPaginate = (numberPage, recipes) => async (dispatch) => {
+//     let cardsPerPage = numberPage === recipes.length ? recipes.slice(numberPage * 9, recipes.length) : recipes.slice(numberPage * 9, (numberPage * 9) + 9);
+//     let $backArrow = document.querySelector('.btn-back');
+//     let $nextArrow = document.querySelector('.btn-next');
+
+//     if (numberPage == 0) {
+//         $backArrow.classList.add("disabled");
+//         $backArrow.setAttribute("disabled");
+//     }
     
-    return await dispatch({
-        type: GET_PAGE_RECIPES,
-        payload: cardsPerPage
-    })
-}
+
+//     if (numberPage == 11) {
+//         $nextArrow.classList.add("disabled");
+//         $nextArrow.setAttribute("disabled");
+//     }
+    
+
+//     return await dispatch({
+//         type: GET_PAGE_RECIPES,
+//         payload: cardsPerPage
+//     })
+// }
+
+// export const pageForArrows = (numberPage, recipes) => async (dispatch) => {
+//     let cardsPerPage = numberPage === recipes.length ? recipes.slice(numberPage * 9, recipes.length) : recipes.slice(numberPage * 9, (numberPage * 9) + 9);
+//     let $backArrow = document.querySelector('.btn-back');
+//     let $nextArrow = document.querySelector('.btn-next'); 
+
+//     if (numberPage == 0) {
+//         $backArrow.classList.add("disabled");
+//         $backArrow.setAttribute("disabled");
+//     }
+    
+
+//     if (numberPage == 11) {
+//         $nextArrow.classList.add("disabled");
+//         $nextArrow.setAttribute("disabled");
+//     }
+
+//     return await dispatch({
+//         type: GET_PAGE_RECIPES,
+//         payload: cardsPerPage
+//     })
+// }
