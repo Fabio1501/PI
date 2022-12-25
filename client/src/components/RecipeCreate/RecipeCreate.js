@@ -1,30 +1,63 @@
 import React, { useEffect, useState } from "react";
-import Nav from "../Nav/Nav";
+import Nav, { hiddenSearch } from "../Nav/Nav";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllDiets } from "../../redux/actions";
+import { createRecipe, getAllDiets } from "../../redux/actions";
 import './recipecreate.css';
 import './checkbox.css';
 
 const RecipeCreate = () => {
     const [recipes, setRecipes] = useState({
         name: '',
-        summary: '',
-        image: '',
-        ready: 0,
+        dishSummary: '',
+        img: '',
+        readyInMinutes: 0,
         servings: 0,
-        health: 0,
-        range: 0,
-        steps: [],
+        healthScore: 0,
+        stepAStep: [],
         diets: [],
         ingredients: []
+    });
+    const [value, setValue] = useState({
+        input_steps : '',
+        input_ingredients : ''
     });
     const [errors, setErrors] = useState({});
     const diets = useSelector(state=>state.diets)
     const dispatch = useDispatch();
 
+    function handleCheckbox(e){
+        if (e.target.checked) {
+            recipes[e.target.name].push(e.target.value);
+            setRecipes({...recipes, [e.target.name] : [e.target.name]});
+        }
+
+        setRecipes({...recipes})
+    }
+
+    function handleChangeBtn(e){
+        setValue({...value, [e.target.name] : e.target.value });
+        return e.target.value
+    }
+
     function handleClick(e){
-        [e.target.name].push(e.target.value);
-        setRecipes({...recipes, [e.target.name] : [e.target.name]})
+        e.preventDefault();
+        
+        if (e.target.name === 'ingredients') {
+            recipes.ingredients.push(value.input_ingredients);
+            setRecipes(recipes);
+            setValue({
+                input_steps : '',
+                input_ingredients : ''
+            })
+        }else{
+            recipes.stepAStep.push(value.input_steps);
+            setRecipes(recipes);
+            setValue({
+                input_steps : '',
+                input_ingredients : ''
+            })
+        }
+
     }
 
     function validationErrors(recipes){
@@ -42,13 +75,13 @@ const RecipeCreate = () => {
         errors.name = 'The maximum number of characters is 50'
     }
 
-    if (!recipes.summary) {
-        errors.summary = 'Please, enter the recipe summary'
+    if (!recipes.dishSummary) {
+        errors.dishSummary = 'Please, enter the recipe summary'
     }
 
-    if (!recipes.health) {
-        errors.health = 'Please, enter the health score'
-    }
+    if (recipes.dishSummary.length < 10) {
+        errors.name = 'The minimum number of characters is 10'
+    }    
 
     return errors;
     }
@@ -59,109 +92,174 @@ const RecipeCreate = () => {
             {...recipes, [e.target.name]: e.target.value}))
     }
 
-    function handleView(){}
+    function handleView(e){
+
+    }
 
     function handleSubmit(e){
+        console.log('ESTOY EN SUBMIT');
         e.preventDefault();
+        console.log(errors);
         if (!Object.entries(errors).length) {
-            dispatch();
+            console.log(recipes);
+            dispatch(createRecipe({...recipes, ingredients: recipes.ingredients.toString(), stepAStep: recipes.stepAStep.toString()}));
+            setRecipes({
+                name: '',
+                dishSummary: '',
+                img: '',
+                readyInMinutes: 0,
+                servings: 0,
+                healthScore: 0,
+                stepAStep: [],
+                diets: [],
+                ingredients: []
+            })
         }
     }
 
     useEffect(()=>{
         dispatch(getAllDiets());
+        // hiddenSearch()
+        // hiddenSearch();
     }, [])
+
+    useEffect(()=>{
+        console.log(recipes);
+        console.log(value);
+    }, [recipes, value])
 
     return(
         <div>
             <Nav/>
             <div className="bgd-image scrollbar" id="style-3">
                 <div className="bgd-black-color">
-                    <form className="create-recipe" onSubmit={handleSubmit}>
+                    <form 
+                    className="create-recipe" 
+                    onSubmit={handleSubmit}>
+                        <h2 className="title-form">Create your own recipe!</h2>
                         <div className="inputs-textarea">
                             <div className="inputs-texts">
                                 <div className="inputs name">
                                     <label>Name: </label>
-                                    <input required onChange={handleChange} value={recipes.name} name="name" type='text'/>
+                                    <input 
+                                    required 
+                                    onChange={handleChange} 
+                                    value={recipes.name} 
+                                    name="name" 
+                                    type='text'/>
                                 </div>
+                                {!errors.name && <p className="error">{errors.name}</p>}
                                 <div className="inputs summary">
                                     <label>Summary: </label>
-                                    <input required onChange={handleChange} value={recipes.summary} name="summary" type='text'/>
+                                    <input 
+                                    required 
+                                    onChange={handleChange} 
+                                    value={recipes.summary} 
+                                    name="dishSummary" 
+                                    type='text'/>
                                 </div>
+                                {!errors.name && <p className="error">{errors.name}</p>}
                                 <div className="inputs image">
                                     <label>Image: </label>
-                                    <input onChange={handleChange} value={recipes.image} name="image" type='text' placeholder="Insert URL"/>
+                                    <input 
+                                    onChange={handleChange} 
+                                    value={recipes.image} 
+                                    name="img" 
+                                    type='text' 
+                                    placeholder="Insert URL"/>
                                 </div>
                                 <div className="inputs ready">
                                     <label>Ready in minutes: </label>
-                                    <input onChange={handleChange} value={recipes.ready} name="ready" type='number'/>
+                                    <input 
+                                    onChange={handleChange} 
+                                    value={recipes.ready} 
+                                    name="readyInMinutes" 
+                                    type='number'/>
                                 </div>
                                 <div className="inputs servings">
                                     <label>Servings: </label>
-                                    <input onChange={handleChange} value={recipes.servings} name="servings" type='number'/>
+                                    <input 
+                                    onChange={handleChange} 
+                                    value={recipes.servings} 
+                                    name="servings" 
+                                    type='number'/>
                                 </div>
                                 <div className="inputs health">
                                     <label>Health score: </label>
                                     <div className="input-range">
                                         <input
-                                        required
                                         onChange={handleChange}
-                                        value={recipes.range} 
-                                        name="health"
-                                        type='range'/>
-                                        <div></div>
+                                        value={recipes.health} 
+                                        name="healthScore"
+                                        type="range"/>
+                                        <div className="view-range">{recipes.healthScore}</div>
                                     </div>
                                 </div>
                             </div>
                             <div className="steps">
                                 <h3>Step a step</h3>
                                 <input 
-                                value={recipes.steps}
-                                name='steps'
+                                value={value.input_steps}
+                                name='input_steps'
                                 type='text'
-                                onChange={handleChange}/>
+                                onChange={handleChangeBtn}/>
                                 <div className="btns">
-                                    <button onClick={handleClick}>ADD STEP</button>
-                                    <button onClick={handleView}>VIEW STEPS</button>
+                                    <button 
+                                    name = 'stepAStep'
+                                    className="btn-create" 
+                                    onClick={handleClick}>ADD STEP</button>
+                                    <button className="btn-create" 
+                                    onClick={handleView}>VIEW STEPS</button>
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            <h3>Ingredients</h3>
-                            <input 
-                            type='text'
-                            value={recipes.ingredients}
-                            name= 'ingredients'
-                            onChange={handleChange}/>
-                            <div className="btns">
-                                <button onClick={handleClick}>ADD INGREDIENTS</button>
-                                <button onClick={handleView}>VIEW INGREDIENTS</button>
+                        <div className="diets-ingredients">
+                            <div className="ingredients">
+                                <h3>Ingredients</h3>
+                                <input
+                                name="input_ingredients"
+                                type='text'
+                                value={value.input_ingredients}
+                                onChange= {handleChangeBtn}/>
+                                <div className="btns">
+                                    <button 
+                                    name = 'ingredients' className="btn-create" 
+                                    onClick={handleClick}>ADD INGREDIENTS</button>
+                                    <button 
+                                    className="btn-create" 
+                                    onClick={handleView}>VIEW INGREDIENTS</button>
+                                </div>
+                            </div>
+                            <div className="diets">
+                                <h3>{`Choose recipe diet type \n (One or more)`}</h3>
+                                <div className="choose-diets">
+                                {
+                                    diets.map(diet => {
+                                        return (
+                                            <div
+                                            key={diet.id} className="checkbox-wrapper">
+                                                
+                                                    <input 
+                                                    type="checkbox" 
+                                                    onChange={handleCheckbox} 
+                                                    key={diet.name} 
+                                                    value= {diet.name} 
+                                                    name='diets' 
+                                                    id={diet.name} />
+                                                    <label
+                                                    key={`${diet.name}${diet.id}`} 
+                                                    >{`${diet.name.charAt(0).toUpperCase()}${diet.name.slice(1)}`}</label>
+                                                </div>
+                                                )
+                                    
+                                            })
+                                        }
+                                </div>
                             </div>
                         </div>
-                        <div>
-                            <h3>{`Choose recipe diet type \n (One or more)`}</h3>
-                            {
-                                diets.map(diet => {
-                                    return (
-                                        <div className="choose-diets">
-                                            <div className="checkbox">
-                                                <input 
-                                                type='checkbox'
-                                                id="checkbox"
-                                                value='diets'
-                                                name={diet.name}
-                                                key={diet.id}
-                                                onClick = {(e)=>handleClick(e)}
-                                                />
-                                                <label for={diet.name}
-                                                ><span>{`${diet.name.charAt(0).toUpperCase()}${diet.name.slice(1)}`}</span></label>
-                                            </div> 
-                                        </div>
-                                    )
-                                })
-                            }
-                            <input type='submit' value='Create Recipe'/>
-                        </div>
+                        <button 
+                        className="btn-create btn-create-recipe"
+                        type='submit'>CREATE RECIPE</button>
                     </form>
                 </div>
             </div>

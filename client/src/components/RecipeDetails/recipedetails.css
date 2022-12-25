@@ -1,0 +1,15 @@
+.recipe-details-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    margin: auto;
+    border: 1px solid black;
+}   
+
+.container-img-info{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

@@ -1,4 +1,4 @@
-import {GET_ALL_RECIPES, GET_RECIPE_DETAILS, GET_RECIPES_FILTERS, GET_ALL_DIETS, GET_PAGE_RECIPES} from '../utils'
+import {GET_ALL_RECIPES, GET_RECIPE_DETAILS, GET_RECIPES_FILTERS, GET_ALL_DIETS, CREATE_RECIPE} from '../utils'
 
 const initialState = {
     recipes: [],
@@ -24,15 +24,14 @@ const rootReducer = (state = initialState, action)=>{
                 ...state,
                 diets: action.payload
             }    
-        case GET_PAGE_RECIPES:
-            return{
-                ...state,
-                recipesPage: action.payload
-            }
         case GET_RECIPE_DETAILS:
             return{
                 ...state,
                 recipeDetails: action.payload
+            }
+        case CREATE_RECIPE:
+            return{
+                ...state,
             }              
         default:
             return state;

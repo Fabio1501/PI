@@ -4,7 +4,7 @@
     flex-direction: column;
     justify-content: start;
     width: 32%;
-    height: 460px;
+    height: 550px;
     gap: 5px;
     background-color: var(--main-third-color);
     color: var(--black-first-color);
@@ -12,6 +12,12 @@
     border-radius: 10px;
     /* Arriba | Derecha | Abajo | Izquierda */
     margin-top: .5em;
+}
+
+.card:hover{
+    -webkit-box-shadow: 1px 1px 13px 3px var(--black-third-color);
+    -moz-box-shadow: 1px 1px 13px 3px var(--black-third-color);
+    box-shadow: 1px 1px 13px 3px var(--black-third-color);
 }
 
 .card img{
@@ -22,36 +28,21 @@
 
 .card h2{
     margin: 10px;
-    font-size: 1rem;
+    font-size: 1.1rem;
+    color: var(--main-first-color);
+    position: relative;
+    top: -3.8em;
+    padding: .7em;
 }
 
-.attributes-values{
+/* .attributes-values{
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 90%;
     align-self: center;
     margin-bottom: 10px;
-}
-
-.health{
-    font-size: 16px;
-}
-
-.value{
-    font-size: 1rem;
-}
-
-.diet-home{
-    display: flex;
-    width: 90%;
-    margin-bottom: 10px;
-    margin-left: 1rem;
-}
-
-.diet-home h5{
-    font-size: 16px;
-}
+} */
 
 .diets-home{
     display: grid;
@@ -60,6 +51,8 @@
     align-self: center;
     column-gap: .5em;
     row-gap: .5em;    
+    position: relative;
+    top: -3.8em;
 }
 
 
@@ -74,4 +67,26 @@
     color: var(--main-first-color);
     font-weight: 600;
     padding: .1em;
+}
+
+.value-health{
+    width: 20%;
+    height: 13%;
+    -webkit-clip-path: polygon(0 0, 0% 100%, 100% 0);
+    clip-path: polygon(0 0, 0% 100%, 100% 0);
+    background-color: var(--main-first-color);
+    border-radius: 10px 0px 0px 0px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    position: relative;
+    padding: 0;
+    margin: 0;
+    top: calc(-49%);
+}
+
+.value-health .value{
+    font-size: 1.1rem;
+    color: var(--black-fifth-color);
+    font-weight: 600;
 }

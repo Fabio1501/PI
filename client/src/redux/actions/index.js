@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {GET_ALL_RECIPES, GET_ALL_DIETS, GET_RECIPE_DETAILS, GET_RECIPES_FILTERS, GET_PAGE_RECIPES} from '../utils'
+import {GET_ALL_RECIPES, GET_ALL_DIETS, GET_RECIPE_DETAILS, GET_RECIPES_FILTERS, CREATE_RECIPE} from '../utils'
 
 export const getAllRecipes = (name) => {
     return async (dispatch)=>{
@@ -20,7 +20,15 @@ export const getAllRecipes = (name) => {
 }
 
 export const getRecipeDetails = (id) => async (dispatch) => {
-    let recipes = await axios(`http://localhost:3001/recipes?id=${id}`);
+    let recipes = await axios(`http://localhost:3001/recipes/${id}`);
+
+    if(typeof recipes.ingredients === 'string'){
+        recipes = {
+            ...recipes, 
+            ingredients: recipes.ingredients.split(','),
+            stepAStep: recipes.stepAStep.split(',')
+        } 
+    }
 
     return await dispatch({
         type: GET_RECIPE_DETAILS,
@@ -70,11 +78,17 @@ const filterDiets = async (option, info) => {
     info = await info.data.filter((recipe) => {
         if(!recipe.diets){
             for(let recip of recipe.Diets){
+                if (!recipe.diets) {
+                    continue
+                }
                 if(recip === option) return true;
             }
         }
-
+        console.log(recipe.diets);
         for(let recip of recipe.diets){
+            if (!recipe.diets) {
+                continue
+            }
             if(recip === option) return true;
         }
     })
@@ -152,3 +166,12 @@ export const filterSelect = (select, option) => {
 //         payload: cardsPerPage
 //     })
 // }
+
+export const createRecipe = (recipe) => async (dispatch) => {
+    let response = await axios.post('http://localhost:3001/recipes', recipe);
+
+    return await dispatch({
+        type: CREATE_RECIPE,
+        payload: response.data
+    })
+}
