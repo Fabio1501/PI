@@ -25,16 +25,10 @@ const Recipes = () => {
     const recipesGlobal = useSelector(state => state.recipes);
     const recipesLocal = recipesGlobal;
     const [currentPage, setCurrentPage] = useState(1);
-    // const cantPages = addRecipesByPage();
-    // const recipesPage = useSelector(state => state.recipesPage);
     const dispatch = useDispatch();
 
     useEffect(()=>{
         dispatch(getAllRecipes());
-        // setRecipesLocal(recipesGlobal);
-        // addRecipesByPage();
-        
-        console.log(recipesLocal, recipesGlobal);
     }, []);
     
     useEffect(()=>{

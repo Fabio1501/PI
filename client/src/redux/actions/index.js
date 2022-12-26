@@ -168,10 +168,29 @@ export const filterSelect = (select, option) => {
 // }
 
 export const createRecipe = (recipe) => async (dispatch) => {
-    let response = await axios.post('http://localhost:3001/recipes', recipe);
+    const $loader = document.querySelector(".create-form-loader"),
+    $response = document.querySelector(".create-form-response");
+    
+    $loader.classList.remove("none");
+    
+    try {
+        let response = await axios.post('http://localhost:3001/recipes', recipe);
 
-    return await dispatch({
-        type: CREATE_RECIPE,
-        payload: response.data
-    })
+        $loader.classList.add("none");
+        $response.classList.remove("none");
+        
+        return await dispatch({
+            type: CREATE_RECIPE,
+            payload: response.data
+        })
+    } catch (error) {
+        let message = error.statusText || "Ocurrió un error al enviar, intenta nuevamente";
+        $response.innerHTML = `Error ${error.status}: ${message}`;
+    }finally{
+        setTimeout(()=>{
+            $response.classList.add("none")
+            $response.innerHTML = "";
+        }, 3000)
+    }
+
 }

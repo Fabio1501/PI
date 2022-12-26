@@ -61,6 +61,12 @@
     margin-top: 20px;
 }
 
+.btn-home:hover{
+    -webkit-box-shadow: 0 0 18px 7.5px var(--main-chef-color);
+    -moz-box-shadow: 0 0 18px 7.5px var(--main-chef-color);
+    box-shadow: 0 0 18px 7.5px var(--main-chef-color);
+}
+
 .title-pp{
     color: var(--main-chef-color);
     font-size: 2.2rem;    

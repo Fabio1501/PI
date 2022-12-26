@@ -232,10 +232,19 @@ input[type="range"]::-webkit-slider-runnable-track {
     border: 2px solid var(--main-first-color);
     border-radius: 7px;
     padding: .6em;
+    color: var(--main-first-color);
 }
 
 .inputs-texts input::placeholder{
     color: var(--main-first-color);
+}
+
+.error{
+    align-self: flex-end;
+    width: 45%;
+    padding: 0px;
+    margin: -1.7em;
+    margin-right: 1em;
 }
 
 .btn-create{
@@ -254,6 +263,12 @@ input[type="range"]::-webkit-slider-runnable-track {
     margin-top: 2em;
 }
 
+.btn-create:hover{
+    -webkit-box-shadow: 0 0 18px 7.5px var(--main-first-color);
+    -moz-box-shadow: 0 0 18px 7.5px var(--main-first-color);
+    box-shadow: 0 0 18px 7.5px var(--main-first-color);
+}
+
 .btn-create-recipe{   
     margin: 5em;
     cursor: pointer;
@@ -269,4 +284,27 @@ input[type="range"]::-webkit-slider-runnable-track {
 .checkbox-wrapper input{
     width: 15px;
     height: 15px;
+}
+
+.disabled{
+    cursor: not-allowed;
+}
+
+.disabled:hover{
+    box-shadow: none;
+    -webkit-box-shadow:0;
+    -moz-box-shadow: 0;
+}
+
+.create-form-loader{
+    width: 30%;
+    height: 30%;
+}
+
+.create-form-response{
+    color: var(--main-success-color);
+}
+
+.none{
+    display: none;
 }

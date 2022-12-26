@@ -7,6 +7,7 @@
     background-color: var(--main-fourth-color);
     color: var(--main-second-color);
     box-shadow: 5px 5px 20px var(--black-fourth-color);
+    z-index: 2;
 }
 
 .logo{

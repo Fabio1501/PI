@@ -17,7 +17,7 @@ const RecipeDetails = () => {
         dispatch(getRecipeDetails(id))
         stringToHtml(recipeDetails.dishSummary)
         console.log(recipeDetails, id, typeof recipeDetails.ingredients);
-    }, [recipeDetails])
+    }, [])
     
     function stringToHtml(str){
         var $dishSummary = document.querySelector('.dishSummary');

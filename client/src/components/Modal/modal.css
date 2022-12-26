@@ -1,0 +1,42 @@
+.container-modal{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 5;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--black-third-color);
+    display: none;
+}
+
+.steps-ingredients{
+    width: 50%;
+    height: 70%;
+    border: 2px solid var(--main-first-color);
+    background-color: var(--black-fifth-color);
+}
+
+.steps-ingredients ol{
+    color: var(--main-first-color);
+    font-size: 1.2rem;
+}
+
+.title-btn-close{
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--main-first-color);
+}
+
+.title-btn-close h3{
+    color: var(--black-fifth-color);
+    margin: 0px 2em;
+}
+
+.title-btn-close img{
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    margin: 0px 2em;
+}
