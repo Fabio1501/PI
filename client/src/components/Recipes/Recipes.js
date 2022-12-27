@@ -53,12 +53,12 @@ const Recipes = () => {
                 {   
                 !currentRecipes.length ? 
                 <div className="loader-error">
-                    <img className="loader visible" src={loader}/>
+                    <img alt="img-loader" className="loader visible" src={loader}/>
                     <div className="error none">
-                        <img src={errorReceta}/>
+                        <img alt="img-error" src={errorReceta}/>
                         <div className="text-error">
                             <h3>ERROR 404: NOT FOUND</h3>
-                            <p>LO SENTIMOS! No pudimos encontrar tu/s receta/s 😔</p>
+                            <p>SORRY! We couldn't find your recipe/s 😔</p>
                         </div>
                     </div>
                 </div>: 

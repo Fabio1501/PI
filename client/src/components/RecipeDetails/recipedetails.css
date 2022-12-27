@@ -1,4 +1,5 @@
 .recipe-details-container{
+    padding-top: 4em;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -12,57 +13,101 @@
 .container-img-info{
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    width: 90%;
 }
 
-.container-img-info .img-prin{
-    width: 45%;
+.container-img-icons{
+    display: flex;
+    flex-direction: column;
+    row-gap: 3.5em;
+}
+
+.container-img-info .container-img-icons .img-prin{
+    width: 90%;
     border-radius: .7em;    
-    -webkit-box-shadow: 0 0 9px 7.5px var(--main-first-color);
-    -moz-box-shadow: 0 0 9px 7.5px var(--main-first-color);
-    box-shadow: 0 0 9px 7.5px var(--main-first-color);
-    border: 2px solid var(--main-first-color);
+    -webkit-box-shadow: 0 0 20px 5px var(--main-first-color);
+    -moz-box-shadow: 0 0 20px 5px var(--main-first-color);
+    box-shadow: 0 0 20px 5px var(--main-first-color);
 }
 
 .container-img-info .container-info{
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 45%;
-    row-gap: 1em;
+    row-gap: 1.5em;
 }
 
-.container-info .container-icons{
+.container-info .title{
+    padding: .5em;
+    color: var(--main-first-color);
+    border-left: 3px solid var(--main-first-color);
+}
+
+.container-img-icons .container-icons{
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    width: 90%;
+    column-gap: 2em;
 }
 
 .container-icons .icons{
+    padding: 0px;
+    width: 8em;
+    height: 2.5em;
     display: flex;
-    gap: .5em;
+    column-gap: .1em;
 }
 
-.container-icons .icons{
-    width: 2.3em;
-    height: 2.3em;
+.container-icons .icons img{
+    width: 2.6em;
+    padding: 0px;
+    height: 2.6em;
+}
+
+.container-icons .icons .text-info{
+    width: 150px;
 }
 
 .container-icons .icons p{
-    font-size: 1em;
-    color: var(--black-third-color);
+    color: var(--main-first-color);
 }
 
 .container-icons .icons h4{
-    color: var(--black-fifth-color);
+    color: var(--main-first-color);
+}
+
+.container-info .dishSummary{
+    width: 100%;
+    color: var(--main-first-color);
+}
+
+.dishSummary a{
+    text-decoration: none;
+}
+
+.title-diets{
+    font-size: 1.2rem;
+    color: var(--main-first-color);
+    padding: .3em;
+    font-weight: 600;
+    text-decoration: underline;
 }
 
 .container-diets{
+    width: 95%;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: space-evenly;
     flex-wrap: wrap;
+    align-items: center;
     color: var(--main-first-color);
-    font-size: 1.3rem;
+    font-weight: 600;
+    border: 2px solid var(--main-first-color);
+    border-radius: .6em;
+    padding: 1em;
+    -webkit-box-shadow: 0 0 20px 5px var(--main-first-color);
+    -moz-box-shadow: 0 0 20px 5px var(--main-first-color);
+    box-shadow: 0 0 20px 5px var(--main-first-color);
 }
 
 .steps-ingredients{

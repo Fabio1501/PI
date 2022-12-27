@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getRecipeDetails } from "../../redux/actions";
@@ -10,16 +10,18 @@ import './recipedetails.css'
 
 const RecipeDetails = () => {
     let {id} = useParams();
-    const recipeDetails = useSelector(state => state.recipeDetails);
-    const recipeDetail = recipeDetails;
+    const detailsGlobal = useSelector(state => state.recipeDetails);
+    const recipeDetails = detailsGlobal;
     const dispatch = useDispatch();
 
     useEffect(()=>{
         dispatch(getRecipeDetails(id))
-        // stringToHtml(recipeDetails.dishSummary)
-        console.log(recipeDetail, id, typeof recipeDetail.ingredients);
     }, [])
     
+    useEffect(()=>{
+        stringToHtml(recipeDetails.dishSummary);
+    }, [recipeDetails])
+
     function stringToHtml(str){
         var $dishSummary = document.querySelector('.dishSummary');
         $dishSummary.innerHTML = str;
@@ -31,33 +33,43 @@ const RecipeDetails = () => {
             <Nav/>
             <div className="recipe-details-container">
                 <div className="container-img-info">
-                    <img className="img-prin" src={recipeDetail.img}/>
-                    <div className="container-info">
+                    <div className="container-img-icons">
+                        <img alt="imgRecipe" className="img-prin" src={recipeDetails.img}/>
                         <div className="container-icons">
-                            <div className="icons icon-health">
-                                <img src={IconHealth}/>
-                                <div className="text-info">
-                                    <p>Health score</p>
-                                    <h4>{recipeDetails.healthScore}</h4>
+                                <div className="icons icon-health">
+                                    <img
+                                    alt="icon-health" 
+                                    src={IconHealth}/>
+                                    <div className="text-info">
+                                        <p>Health score</p>
+                                        <h4>{recipeDetails.healthScore}</h4>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="icons icon-ready">
-                                <img src={IconTime}/>
-                                <div className="text-info">
-                                    <p>Ready in minutes</p>
-                                    <h4>{recipeDetails.readyInMinutes}</h4>
+                                <div className="icons icon-ready">
+                                    <img
+                                    alt="icon-time" 
+                                    src={IconTime}/>
+                                    <div className="text-info">
+                                        <p>Ready in minutes</p>
+                                        <h4>{recipeDetails.readyInMinutes}</h4>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="icons icon-servings">
-                                <img src={IconServings}/>
-                                <div className="text-info">
-                                    <p>Servings</p>
-                                    <h4>{recipeDetails.servings}</h4>
+                                <div className="icons icon-servings">
+                                    <img
+                                    alt="icon-servings" 
+                                    src={IconServings}/>
+                                    <div className="text-info">
+                                        <p>Servings</p>
+                                        <h4>{recipeDetails.servings}</h4>
+                                    </div>
                                 </div>
-                            </div>
                         </div>
+                    </div>
+                    <div className="container-info">
+                        <h2 className="title">{recipeDetails.name}</h2>
                         <div className="dishSummary">
                         </div>
+                        <h4 className="title-diets">Diets associates at recipes</h4>
                         <div className="container-diets">
                             {
                                 !recipeDetails.diets && !recipeDetails.Diets ?
@@ -85,23 +97,44 @@ const RecipeDetails = () => {
                         </div>
                     </div>
                 </div>
-                <hr/>
                 <div className="steps-ingredients">
                     <div className="steps">
                         <h3>Step by step</h3>
-                        <ul>
-                            
-                        </ul>
+                        <ol>
+                            {
+                                !recipeDetails.stepAStep ?
+                                <p className="not-found">There is not step by step for this recipe
+                                </p>
+                                :recipeDetails.stepAStep.map(step => {
+                                    return(
+                                        <li key={step}>
+                                            {step}
+                                        </li>
+                                    )
+                                })
+                            }
+                        </ol>
                     </div>
                     <div className="ingredients">
                         <h3>Ingredients</h3>
-                        <ul>
-                            
-                        </ul>
+                        <ol>
+                            {
+                                !recipeDetails.ingredients ?
+                                <p className="not-found">There are not ingredients for this recipe</p>
+                                :recipeDetails.ingredients.map(ingredient => {
+                                    return ingredient.map(ing=>{
+                                        return(
+                                            <li key={ing}>
+                                                {ing}
+                                            </li>
+                                        )                                        
+                                    })
+                                })
+                            }
+                        </ol>
                     </div>
                 </div>
             </div>
-
         </div>
     )
 }

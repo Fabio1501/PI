@@ -28,7 +28,7 @@ const Nav = () => {
     return(
         <div className="container-nav nav">
             <Link to = '/' className="logo"> 
-                <img src={logoPrueba}/>
+                <img alt="logo" src={logoPrueba}/>
             </Link>
             <SearchBar />
             <div className="links">

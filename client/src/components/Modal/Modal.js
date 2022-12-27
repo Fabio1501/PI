@@ -16,6 +16,7 @@ const Modal = ({steps, ingredients, view}) => {
                 <div className="title-btn-close">
                     <h3>List of {view}</h3>
                     <img
+                    alt="closeModal"
                     onClick={handleClose} 
                     src={CloseBtn}/>
                 </div>

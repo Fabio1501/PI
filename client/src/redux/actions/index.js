@@ -21,7 +21,7 @@ export const getAllRecipes = (name) => {
 
 export const getRecipeDetails = (id) => async (dispatch) => {
     let recipes = await axios(`http://localhost:3001/recipes/${id}`);
-
+    console.log(recipes);
     if(recipes.ingredients && typeof recipes.ingredients === 'string'){
         recipes = {
             ...recipes, 

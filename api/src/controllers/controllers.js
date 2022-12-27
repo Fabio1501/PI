@@ -4,8 +4,8 @@ let url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiUrl}&ad
 const {Recipe, Diet} = require("../db");
 
 async function getRecipesForIdApi(idApi){
-    // url = `https://api.spoonacular.com/recipes/${idApi}/information?apiKey=${apiUrl}`
-    url = `https://api.spoonacular.com/recipes/${idApi}/information?apiKey=44a4d0c7b7564774918875cd3a176309`
+    url = `https://api.spoonacular.com/recipes/${idApi}/information?apiKey=${apiUrl}`
+    // url = `https://api.spoonacular.com/recipes/${idApi}/information?apiKey=44a4d0c7b7564774918875cd3a176309`
     let infoOneRecipe = await axios(url, {
         headers: {"Accept-Encoding": "gzip,deflate,compress"}
     });
@@ -33,8 +33,7 @@ async function getRecipesForIdApi(idApi){
             ingredients: analyzedInstructions[0]?.steps?.map(step=>step.ingredients?.map(ingredient => ingredient.name)),
             img: image,
             readyInMinutes,
-            servings,
-            aggregateLikes
+            servings
     }
 
     if (!data) {
@@ -58,16 +57,9 @@ module.exports = {
             return {
                 id: recipe.id,
                 name: recipe.title,
-                dishSummary: recipe.summary,
                 healthScore: recipe.healthScore,
-                stepAStep: recipe.analyzedInstructions[0]?.steps?.map(step=>step.step),
                 diets: recipe.diets,
-                ingredients: recipe.analyzedInstructions[0]?.steps?.map(step=>step.ingredients?.map(ingredient => ingredient.name)),
-                equipment: recipe.analyzedInstructions[0]?.steps?.map(step=>step.equipment?.map(equipment=>equipment.name)),
                 img: recipe.image,
-                readyInMinutes: recipe.readyInMinutes,
-                servings: recipe.servings,
-                aggregateLikes: recipe.aggregateLikes
             }
         })
 

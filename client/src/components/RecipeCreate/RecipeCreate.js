@@ -45,8 +45,15 @@ const RecipeCreate = () => {
     }
 
     function handleCheckbox(e){
+
         if (e.target.checked) {
             recipes[e.target.name].push(e.target.value);
+            setRecipes({...recipes, [e.target.name] : [e.target.name]});
+        }
+
+        let includeDiet = recipes[e.target.name].find(diet => diet === e.target.value)
+        if (!e.target.checked && includeDiet !== undefined) {
+            recipes[e.target.name].splice(includeDiet);
             setRecipes({...recipes, [e.target.name] : [e.target.name]});
         }
 
@@ -122,6 +129,8 @@ const RecipeCreate = () => {
 
     function handleSubmit(e){
         e.preventDefault();
+        const $button = document.querySelector('.btn-create-recipe');
+
 
         if (!Object.entries(errors).length) {
             dispatch(createRecipe({...recipes, ingredients: recipes.ingredients.toString(), stepAStep: recipes.stepAStep.toString()}));
@@ -136,6 +145,8 @@ const RecipeCreate = () => {
                 diets: [],
                 ingredients: []
             })
+            $button.setAttribute("disabled", true);
+            $button.classList.add("disabled");
         }
     }
 
@@ -259,8 +270,7 @@ const RecipeCreate = () => {
                                     diets.map(diet => {
                                         return (
                                             <div
-                                            key={diet.id} className="checkbox-wrapper">
-                                                
+                                            key={diet.id} className="checkbox-wrapper"> 
                                                     <input 
                                                     type="checkbox" 
                                                     onChange={handleCheckbox} 
@@ -273,7 +283,6 @@ const RecipeCreate = () => {
                                                     >{`${diet.name.charAt(0).toUpperCase()}${diet.name.slice(1)}`}</label>
                                                 </div>
                                                 )
-                                    
                                             })
                                         }
                                 </div>
@@ -283,8 +292,9 @@ const RecipeCreate = () => {
                         disabled
                         className="btn-create btn-create-recipe disabled"
                         type='submit'>CREATE RECIPE</button>
-                        <div className="create-form-loader none">
-                            <img src={Loader} alt="Cargando"/>
+                        <div className="loader create-form-loader none">
+                            <span>FoodApp</span>
+                            <span>FoodApp</span>
                         </div>
                         <div className="create-form-response none">
                             <p>Los datos han sido enviados.</p>

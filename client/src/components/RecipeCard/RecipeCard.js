@@ -5,12 +5,7 @@ import { Link } from "react-router-dom";
 import './recipecard.css';
 
 export default class RecipeCard extends React.Component{
-    constructor(props){
-        super(props);
-        // this.state = { counter: 0 }
-        // this.handleClick = this.handleClick.bind(this);
-    }
-
+    
     render(){
         return(
             <Link 
