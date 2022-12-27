@@ -12,7 +12,7 @@ const Modal = ({steps, ingredients, view}) => {
 
     return(
         <div className="container-modal">
-            <div className="steps-ingredients">
+            <div className="steps-ingredients-modal">
                 <div className="title-btn-close">
                     <h3>List of {view}</h3>
                     <img

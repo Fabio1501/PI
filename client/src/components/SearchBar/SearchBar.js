@@ -5,17 +5,6 @@ import iconSearch from '../../assets/icon search.svg';
 import { getAllRecipes } from '../../redux/actions/index';
 import './searchbar.css'
 
-// export function hiddenSearch(){
-//     let $search = document.querySelector('.search');
-//     let url = window.location.href;
-//     let {id} = useParams();
-
-//     if (id || url === 'http://localhost:3000/recipes/create') {
-//         $search.classList.add('hiddenSearch');
-//     }
-
-// }
-
 const SearchBar = () => {
     const [nameRecipes, setNameRecipes] = useState('');
     const dispatch = useDispatch();

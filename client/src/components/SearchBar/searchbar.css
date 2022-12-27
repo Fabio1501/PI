@@ -1,9 +1,14 @@
 .wrapSearch{
     width: 30%;
+    -webkit-box-shadow: 0 10px 13px -7.5px var(--main-first-color);
+    -moz-box-shadow: 0 10px 13px -7.5px var(--main-first-color);
+    box-shadow: 0 10px 13px -7.5px var(--main-first-color);
+    border-radius: 10px 10px 10px 10px;
 }
 
 .search {
     width: 100%;
+    height: inherit;
     position: relative;
     display: flex;
     justify-content: center;
@@ -17,15 +22,14 @@
 
 .searchRecipe {
     width: 100%;
-    height: 45px;
+    height: 31px;
     border: 2px solid var(--main-first-color);
     border-right: none;
     padding: 5px;
-    height: 30px;
     border-radius: 10px 0 0 10px;
     outline: none;
     color: var(--main-first-color);
-    background-color: var(--black-fifth-color);
+    background-color: transparent;
 }
 
 .searchRecipe::placeholder{
@@ -41,12 +45,12 @@
     width: 50px;
     height: 45px;
     border: 2px solid var(--main-first-color);
-    text-align: center;
     border-radius: 0 10px 10px 0;
+    text-align: center;
     cursor: pointer;
     font-size: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--black-fifth-color);
+    background-color: transparent;
 }

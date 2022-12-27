@@ -3,8 +3,7 @@ import {GET_ALL_RECIPES, GET_RECIPE_DETAILS, GET_RECIPES_FILTERS, GET_ALL_DIETS,
 const initialState = {
     recipes: [],
     recipeDetails: [],
-    diets: [],
-    recipesPage: []
+    diets: []
 }
 
 const rootReducer = (state = initialState, action)=>{

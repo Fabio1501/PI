@@ -11,8 +11,11 @@
     border-radius: 15px;
     border: 2px solid var(--main-first-color);
     color: var(--main-first-color);
-    background-color: var(--black-fifth-color);
+    background-color: transparent;
     cursor: pointer;
+    -webkit-box-shadow: 0 10px 13px -7.5px var(--main-first-color);
+    -moz-box-shadow: 0 10px 13px -7.5px var(--main-first-color);
+    box-shadow: 0 10px 13px -7.5px var(--main-first-color);
 }
 
 .dropdown option:first-child{

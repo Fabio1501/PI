@@ -15,9 +15,9 @@
 }
 
 .card:hover{
-    -webkit-box-shadow: 1px 1px 13px 3px var(--black-third-color);
-    -moz-box-shadow: 1px 1px 13px 3px var(--black-third-color);
-    box-shadow: 1px 1px 13px 3px var(--black-third-color);
+    -webkit-box-shadow: 1px 1px 13px 3px var(--main-second-color);
+    -moz-box-shadow: 1px 1px 13px 3px var(--main-second-color);
+    box-shadow: 1px 1px 13px 3px var(--main-second-color);
 }
 
 .card img{
@@ -34,15 +34,6 @@
     top: -3.8em;
     padding: .7em;
 }
-
-/* .attributes-values{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 90%;
-    align-self: center;
-    margin-bottom: 10px;
-} */
 
 .diets-home{
     display: grid;

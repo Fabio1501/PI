@@ -22,6 +22,10 @@
     height: 90px;
 }
 
+.logo img:hover{
+    scale: 1.1;
+}
+
 .links{
     width: 30%;
     display: flex;
@@ -34,12 +38,18 @@
     color: var(--main-first-color);
     font-size: 24px;
     font-weight: 600;
+    padding: .5em;
+    transition: 500ms step-start;
 }
 
 .link:hover{
-    text-decoration: underline;
+    border: 2px solid var(--main-first-color);
+    border-radius: .5em;
+    -webkit-box-shadow: 0 10px 13px -7.5px var(--main-first-color);
+    -moz-box-shadow: 0 10px 13px -7.5px var(--main-first-color);
+    box-shadow: 0 10px 13px -7.5px var(--main-first-color);
 }
 
 .link-home{
-    margin: 60px;
+    margin: 45px;
 }

@@ -4,7 +4,8 @@ let url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiUrl}&ad
 const {Recipe, Diet} = require("../db");
 
 async function getRecipesForIdApi(idApi){
-    url = `https://api.spoonacular.com/recipes/${idApi}/information?apiKey=${apiUrl}`
+    // url = `https://api.spoonacular.com/recipes/${idApi}/information?apiKey=${apiUrl}`
+    url = `https://api.spoonacular.com/recipes/${idApi}/information?apiKey=44a4d0c7b7564774918875cd3a176309`
     let infoOneRecipe = await axios(url, {
         headers: {"Accept-Encoding": "gzip,deflate,compress"}
     });
@@ -30,7 +31,6 @@ async function getRecipesForIdApi(idApi){
             stepAStep: analyzedInstructions[0]?.steps?.map(step=>step.step),
             diets,
             ingredients: analyzedInstructions[0]?.steps?.map(step=>step.ingredients?.map(ingredient => ingredient.name)),
-            equipment: analyzedInstructions[0]?.steps?.map(step=>step.equipment?.map(equipment=>equipment.name)),
             img: image,
             readyInMinutes,
             servings,
@@ -46,12 +46,12 @@ async function getRecipesForIdApi(idApi){
 
 module.exports = {
     getDataApi: async function(name){
-        let allDataApi = await axios(`${url}&number=100`, {
-            headers: {"Accept-Encoding": "gzip,deflate,compress"}
-        })
-        // let allDataApi = await axios(`https://api.spoonacular.com/recipes/complexSearch?apiKey=44a4d0c7b7564774918875cd3a176309&addRecipeInformation=true&number=100`, {
+        // let allDataApi = await axios(`${url}&number=100`, {
         //     headers: {"Accept-Encoding": "gzip,deflate,compress"}
         // })
+        let allDataApi = await axios(`https://api.spoonacular.com/recipes/complexSearch?apiKey=44a4d0c7b7564774918875cd3a176309&addRecipeInformation=true&number=100`, {
+            headers: {"Accept-Encoding": "gzip,deflate,compress"}
+        })
         allDataApi = allDataApi.data.results;
 
         let data = await allDataApi.map(recipe => {

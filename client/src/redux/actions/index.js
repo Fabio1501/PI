@@ -22,7 +22,7 @@ export const getAllRecipes = (name) => {
 export const getRecipeDetails = (id) => async (dispatch) => {
     let recipes = await axios(`http://localhost:3001/recipes/${id}`);
 
-    if(typeof recipes.ingredients === 'string'){
+    if(recipes.ingredients && typeof recipes.ingredients === 'string'){
         recipes = {
             ...recipes, 
             ingredients: recipes.ingredients.split(','),

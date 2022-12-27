@@ -9,17 +9,6 @@ import RecipeCard from "../RecipeCard/RecipeCard";
 import { getAllRecipes } from '../../redux/actions/index';
 import './recipes.css';
 
-// function addRecipesByPage(){
-//     let cantPages = [];
-//     let nroPages = 12;
-
-//     for (let i = 0; i < nroPages; i++) {
-//         cantPages.push(i);
-//     }
-
-//     return cantPages;
-// }
-
 const Recipes = () => {
     const recipesPerPage = 9;
     const recipesGlobal = useSelector(state => state.recipes);
@@ -62,7 +51,7 @@ const Recipes = () => {
             <Nav />
             <div className="cards-container">
                 {   
-                !currentRecipes.length || !recipesGlobal.length ? 
+                !currentRecipes.length ? 
                 <div className="loader-error">
                     <img className="loader visible" src={loader}/>
                     <div className="error none">

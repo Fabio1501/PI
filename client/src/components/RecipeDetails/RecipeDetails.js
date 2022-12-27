@@ -1,22 +1,23 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getRecipeDetails } from "../../redux/actions";
+import Nav from "../Nav/Nav";
 import IconHealth from '../../assets/icon health score PI.svg'
 import IconServings from '../../assets/icon servings PI.svg'
 import IconTime from '../../assets/icon time PI.svg'
 import './recipedetails.css'
-import Nav from "../Nav/Nav";
 
 const RecipeDetails = () => {
-    const dispatch = useDispatch();
     let {id} = useParams();
-    const recipeDetails = useSelector(state => state.recipeDetails)
+    const recipeDetails = useSelector(state => state.recipeDetails);
+    const recipeDetail = recipeDetails;
+    const dispatch = useDispatch();
 
     useEffect(()=>{
         dispatch(getRecipeDetails(id))
-        stringToHtml(recipeDetails.dishSummary)
-        console.log(recipeDetails, id, typeof recipeDetails.ingredients);
+        // stringToHtml(recipeDetails.dishSummary)
+        console.log(recipeDetail, id, typeof recipeDetail.ingredients);
     }, [])
     
     function stringToHtml(str){
@@ -30,27 +31,29 @@ const RecipeDetails = () => {
             <Nav/>
             <div className="recipe-details-container">
                 <div className="container-img-info">
-                    <img src={recipeDetails.img}/>
+                    <img className="img-prin" src={recipeDetail.img}/>
                     <div className="container-info">
-                        <div className="icons icon-health">
-                            <img src={IconHealth}/>
-                            <div className="text-info">
-                                <p>Health score</p>
-                                <h4>{recipeDetails.healthScore}</h4>
+                        <div className="container-icons">
+                            <div className="icons icon-health">
+                                <img src={IconHealth}/>
+                                <div className="text-info">
+                                    <p>Health score</p>
+                                    <h4>{recipeDetails.healthScore}</h4>
+                                </div>
                             </div>
-                        </div>
-                        <div className="icons icon-ready">
-                            <img src={IconTime}/>
-                            <div className="text-info">
-                                <p>Ready in minutes</p>
-                                <h4>{recipeDetails.readyInMinutes}</h4>
+                            <div className="icons icon-ready">
+                                <img src={IconTime}/>
+                                <div className="text-info">
+                                    <p>Ready in minutes</p>
+                                    <h4>{recipeDetails.readyInMinutes}</h4>
+                                </div>
                             </div>
-                        </div>
-                        <div className="icons icon-servings">
-                            <img src={IconServings}/>
-                            <div className="text-info">
-                                <p>Servings</p>
-                                <h4>{recipeDetails.servings}</h4>
+                            <div className="icons icon-servings">
+                                <img src={IconServings}/>
+                                <div className="text-info">
+                                    <p>Servings</p>
+                                    <h4>{recipeDetails.servings}</h4>
+                                </div>
                             </div>
                         </div>
                         <div className="dishSummary">
@@ -82,6 +85,7 @@ const RecipeDetails = () => {
                         </div>
                     </div>
                 </div>
+                <hr/>
                 <div className="steps-ingredients">
                     <div className="steps">
                         <h3>Step by step</h3>
