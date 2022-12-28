@@ -10,7 +10,7 @@ const RecipeCreate = () => {
     const [recipes, setRecipes] = useState({
         name: '',
         dishSummary: '',
-        img: '',
+        img: 'https://i.postimg.cc/Dy69FXBY/default-image-PI.png',
         readyInMinutes: 0,
         servings: 0,
         healthScore: 0,
