@@ -5,7 +5,8 @@ import PrincipalPage from './components/PrincipalPage/PrincipalPage'
 import Recipes from './components/Recipes/Recipes'
 import RecipeDetails from './components/RecipeDetails/RecipeDetails'
 import RecipeCreate from './components/RecipeCreate/RecipeCreate'
-
+import axios from 'axios';
+axios.defaults.baseURL = 'https://pi-production.up.railway.app/';
 function App(){
   return (
     <div className="App">

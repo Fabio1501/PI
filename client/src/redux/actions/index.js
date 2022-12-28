@@ -4,14 +4,14 @@ import {GET_ALL_RECIPES, GET_ALL_DIETS, GET_RECIPE_DETAILS, GET_RECIPES_FILTERS,
 export const getAllRecipes = (name) => {
     return async (dispatch)=>{
         if(!name){
-            let recipes = await axios('http://localhost:3001/recipes');
+            let recipes = await axios('/recipes');
             return await dispatch({
                 type: GET_ALL_RECIPES,
                 payload: recipes.data
             })
         }
 
-        let recipes = await axios(`http://localhost:3001/recipes?name=${name}`);
+        let recipes = await axios(`/recipes?name=${name}`);
             return await dispatch({
                 type: GET_ALL_RECIPES,
                 payload: recipes.data
@@ -20,7 +20,7 @@ export const getAllRecipes = (name) => {
 }
 
 export const getRecipeDetails = (id) => async (dispatch) => {
-    let recipes = await axios(`http://localhost:3001/recipes/${id}`);
+    let recipes = await axios(`/recipes/${id}`);
     console.log(recipes);
     if(recipes.ingredients && typeof recipes.ingredients === 'string'){
         recipes = {
@@ -37,7 +37,7 @@ export const getRecipeDetails = (id) => async (dispatch) => {
 }
 
 export const getAllDiets = () => async (dispatch) => {
-    let diets = await axios('http://localhost:3001/diets');
+    let diets = await axios('/diets');
     return await dispatch({
         type: GET_ALL_DIETS,
         payload: diets.data
@@ -46,11 +46,11 @@ export const getAllDiets = () => async (dispatch) => {
 
 const filterDb = async (option) => {
     if (option === 'DB') {
-        let recipesDb = await axios(`http://localhost:3001/recipes/db`);
+        let recipesDb = await axios(`/recipes/db`);
         return await recipesDb.data;
     }
 
-    let recipesApi = await axios(`http://localhost:3001/recipes/api`);
+    let recipesApi = await axios(`/recipes/api`);
     return await recipesApi.data;
 }
 
@@ -99,7 +99,7 @@ const filterDiets = async (option, info) => {
 export const filterSelect = (select, option) => {
     console.log(`select: ${select} \n option: ${option}`);
     return async (dispatch) => {
-        let allData = await axios('http://localhost:3001/recipes')
+        let allData = await axios('/recipes')
         let info;
             switch (select){
                 case 'recipes-all-select':
@@ -174,7 +174,7 @@ export const createRecipe = (recipe) => async (dispatch) => {
     $loader.classList.remove("none");
     
     try {
-        let response = await axios.post('http://localhost:3001/recipes', recipe);
+        let response = await axios.post('/recipes', recipe);
 
         $loader.classList.add("none");
         $response.classList.remove("none");
