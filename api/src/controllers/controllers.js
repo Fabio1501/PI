@@ -1,10 +1,13 @@
 const axios = require("axios");
-const {apiUrl} = require("../db");
-let url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiUrl}&addRecipeInformation=true`;
+require('dotenv').config();
+const {
+    API_KEY
+  } = process.env;
+let url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true`;
 const {Recipe, Diet} = require("../db");
 
 async function getRecipesForIdApi(idApi){
-    url = `https://api.spoonacular.com/recipes/${idApi}/information?apiKey=${apiUrl}`
+    url = `https://api.spoonacular.com/recipes/${idApi}/information?apiKey=${API_KEY}`
     // url = `https://api.spoonacular.com/recipes/${idApi}/information?apiKey=44a4d0c7b7564774918875cd3a176309`
     let infoOneRecipe = await axios(url, {
         headers: {"Accept-Encoding": "gzip,deflate,compress"}

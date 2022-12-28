@@ -3,7 +3,6 @@ import Nav from "../Nav/Nav";
 import Modal from "../Modal/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { createRecipe, getAllDiets } from "../../redux/actions";
-import Loader from '../../assets/loader donuts.gif'
 import './recipecreate.css';
 import './checkbox.css';
 
