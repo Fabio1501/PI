@@ -4,7 +4,7 @@ import './modal.css'
 
 const Modal = ({steps, ingredients, view}) => {
 
-    function handleClose(e){
+    function handleClose(){
         const $containerModal = document.querySelector('.container-modal');
         
         $containerModal.style.display = "none";
@@ -15,7 +15,7 @@ const Modal = ({steps, ingredients, view}) => {
             <div className="steps-ingredients-modal">
                 <div className="title-btn-close">
                     <h3>List of {view}</h3>
-                    <IconClose onClick={handleClose}/>
+                    <IconClose handleClose = {handleClose}/>
                     {/* <img
                     alt="closeModal"
                     onClick={handleClose} 

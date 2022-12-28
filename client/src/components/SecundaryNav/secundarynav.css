@@ -3,7 +3,7 @@
     width: 25vw;
     position: fixed;
     top: 90px;
-    right: 0;
+    right: 10px;
     /* z-index: -1; */
     background-color: var(--main-third-color);
     color: var(--main-first-color);

@@ -15,9 +15,9 @@
 }
 
 .card:hover{
-    -webkit-box-shadow: 1px 1px 13px 3px var(--main-second-color);
-    -moz-box-shadow: 1px 1px 13px 3px var(--main-second-color);
-    box-shadow: 1px 1px 13px 3px var(--main-second-color);
+    -webkit-box-shadow: 1px 1px 10px 3px var(--main-first-color);
+    -moz-box-shadow: 1px 1px 10px 3px var(--main-first-color);
+    box-shadow: 1px 1px 10px 3px var(--main-first-color);
 }
 
 .card img{

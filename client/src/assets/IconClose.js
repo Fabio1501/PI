@@ -1,20 +1,22 @@
 import React from "react";
 
-function IconClose() {
+function IconClose({handleClose}) {
   return (
-    <svg
+    <svg onClick={handleClose}
       xmlns="http://www.w3.org/2000/svg"
       xmlnsSvgjs="http://svgjs.com/svgjs"
       xmlnsXlink="http://www.w3.org/1999/xlink"
-      width="288"
-      height="288"
+      width="50"
+      height="50"
+      cursor="pointer"
       version="1.1"
     >
-      <svg
+      <svg onClick={handleClose}
         xmlns="http://www.w3.org/2000/svg"
-        width="288"
-        height="288"
+        width="50"
+        height="50"
         viewBox="0 0 24 24"
+        cursor="pointer"
       >
         <path
           fill="#f2eded"

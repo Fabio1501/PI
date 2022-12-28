@@ -6,13 +6,13 @@ function IconTime() {
       xmlns="http://www.w3.org/2000/svg"
       xmlnsSvgjs="http://svgjs.com/svgjs"
       xmlnsXlink="http://www.w3.org/1999/xlink"
-      width="288"
-      height="288"
+      width="40"
+      height="40"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width="288"
-        height="288"
+        width="40"
+        height="40"
         viewBox="0 0 48 48"
       >
         <path fill="none" d="M0 0h48v48H0z"></path>

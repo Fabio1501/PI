@@ -130,7 +130,6 @@ const RecipeCreate = () => {
         e.preventDefault();
         const $button = document.querySelector('.btn-create-recipe');
 
-
         if (!Object.entries(errors).length) {
             dispatch(createRecipe({...recipes, ingredients: recipes.ingredients.toString(), stepAStep: recipes.stepAStep.toString()}));
             setRecipes({

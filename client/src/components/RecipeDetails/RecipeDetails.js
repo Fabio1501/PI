@@ -22,6 +22,10 @@ const RecipeDetails = () => {
         stringToHtml(recipeDetails.dishSummary);
     }, [recipeDetails])
 
+    useEffect(()=>{
+        recipeDetails = {};
+    })
+
     function stringToHtml(str){
         var $dishSummary = document.querySelector('.dishSummary');
         $dishSummary.innerHTML = str;
