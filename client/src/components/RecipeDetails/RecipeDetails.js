@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getRecipeDetails } from "../../redux/actions";
 import Nav from "../Nav/Nav";
-import IconHealth from '../../assets/icon health score PI.svg'
-import IconServings from '../../assets/icon servings PI.svg'
-import IconTime from '../../assets/icon time PI.svg'
+import IconHealth from '../../assets/IconHealth'
+import IconServings from '../../assets/IconServings'
+import IconTime from '../../assets/IconTime'
 import './recipedetails.css'
 
 const RecipeDetails = () => {
@@ -37,27 +37,21 @@ const RecipeDetails = () => {
                         <img alt="imgRecipe" className="img-prin" src={recipeDetails.img}/>
                         <div className="container-icons">
                                 <div className="icons icon-health">
-                                    <img
-                                    alt="icon-health" 
-                                    src={IconHealth}/>
+                                    <IconHealth/>
                                     <div className="text-info">
                                         <p>Health score</p>
                                         <h4>{recipeDetails.healthScore}</h4>
                                     </div>
                                 </div>
                                 <div className="icons icon-ready">
-                                    <img
-                                    alt="icon-time" 
-                                    src={IconTime}/>
+                                    <IconTime/>
                                     <div className="text-info">
                                         <p>Ready in minutes</p>
                                         <h4>{recipeDetails.readyInMinutes}</h4>
                                     </div>
                                 </div>
                                 <div className="icons icon-servings">
-                                    <img
-                                    alt="icon-servings" 
-                                    src={IconServings}/>
+                                    <IconServings/>
                                     <div className="text-info">
                                         <p>Servings</p>
                                         <h4>{recipeDetails.servings}</h4>

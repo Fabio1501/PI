@@ -1,5 +1,5 @@
 import React from "react";
-import CloseBtn from '../../assets/close-btn.svg'
+import IconClose from '../../assets/IconClose'
 import './modal.css'
 
 const Modal = ({steps, ingredients, view}) => {
@@ -15,10 +15,11 @@ const Modal = ({steps, ingredients, view}) => {
             <div className="steps-ingredients-modal">
                 <div className="title-btn-close">
                     <h3>List of {view}</h3>
-                    <img
+                    <IconClose onClick={handleClose}/>
+                    {/* <img
                     alt="closeModal"
                     onClick={handleClose} 
-                    src={CloseBtn}/>
+                    src={CloseBtn}/> */}
                 </div>
                 <ol>
                     {!view ? 

@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import { useDispatch } from 'react-redux';
-import iconSearch from '../../assets/icon search.svg';
+import IconSearch from "../../assets/IconSearch";
+// import iconSearch from '../../assets/icon search.svg';
+import iconSearch from '../../assets/IconSearch';
 import { getAllRecipes } from '../../redux/actions/index';
 import './searchbar.css'
 
@@ -24,7 +26,7 @@ const SearchBar = () => {
                 value = {nameRecipes}
                 onChange={e => setNameRecipes(e.target.value)}/>
                 <button type="submit" className="searchButton">
-                    <img alt="img-search" src={iconSearch}/>
+                    <IconSearch/>
                 </button>
             </form>
         </div>
