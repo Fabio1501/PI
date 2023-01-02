@@ -8,7 +8,7 @@ export function hiddenSearch(){
     let url = window.location.href;
     let $search = document.querySelector('.wrapSearch');
 
-    if (url === 'http://localhost:3000/recipes'){
+    if (url === 'https://pi-flame.vercel.app/recipes'){
         if ($search.classList.contains('hiddenSearch')) {
             $search.classList.remove('hiddenSearch')
         }
