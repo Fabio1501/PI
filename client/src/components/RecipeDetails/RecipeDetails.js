@@ -1,30 +1,44 @@
-import React, {useEffect} from "react";
-import { useDispatch, useSelector } from "react-redux";
+import axios from 'axios';
+import React, {useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
-import { getRecipeDetails } from "../../redux/actions";
 import Nav from "../Nav/Nav";
+import loader from '../../assets/loader food.gif';
+import errorReceta from '../../assets/error-recetas.webp'
 import IconHealth from '../../assets/IconHealth'
 import IconServings from '../../assets/IconServings'
 import IconTime from '../../assets/IconTime'
 import './recipedetails.css'
 
+export const getRecipeDetails = async (id) => {
+    let recipes = await axios(`/recipes/${id}`);
+
+    if (String(Number(id)) === 'NaN') recipes = await recipes.data[0];
+    else{
+        recipes = await recipes.data
+    }
+
+    return recipes;
+}
+
 const RecipeDetails = () => {
     let {id} = useParams();
-    const detailsGlobal = useSelector(state => state.recipeDetails);
-    const recipeDetails = detailsGlobal;
-    const dispatch = useDispatch();
+    const [recipeDetails, setRecipeDetails] = useState({});
 
     useEffect(()=>{
-        dispatch(getRecipeDetails(id))
+        getRecipeDetails(id).then(res => {
+            setRecipeDetails(res);
+        })
+
+        return () => {
+            setRecipeDetails({});
+        }
     }, [])
     
     useEffect(()=>{
-        stringToHtml(recipeDetails.dishSummary);
+        if (Object.keys(recipeDetails).length > 0) {
+            stringToHtml(recipeDetails.dishSummary);
+        }
     }, [recipeDetails])
-
-    // useEffect(()=>{
-    //     recipeDetails = {};
-    // })
 
     function stringToHtml(str){
         var $dishSummary = document.querySelector('.dishSummary');
@@ -35,7 +49,18 @@ const RecipeDetails = () => {
     return(
         <div className="container-pageDetails">
             <Nav/>
-            <div className="recipe-details-container">
+            {!Object.keys(recipeDetails).length ? 
+            <div className="loader-error">
+            <img alt="img-loader" className="loader visible" src={loader}/>
+            <div className="error none">
+                <img alt="img-error" src={errorReceta}/>
+                <div className="text-error">
+                    <h3>ERROR 404: NOT FOUND</h3>
+                    <p>SORRY! We couldn't find your recipe/s 😔</p>
+                </div>
+            </div>
+        </div>:
+                <div className="recipe-details-container">
                 <div className="container-img-info">
                     <div className="container-img-icons">
                         <img alt="imgRecipe" className="img-prin" src={recipeDetails.img}/>
@@ -71,14 +96,14 @@ const RecipeDetails = () => {
                         <div className="container-diets">
                             {
                                 !recipeDetails.diets && !recipeDetails.Diets ?
-                                <h3>No hay dietas asociadas a la receta {recipeDetails.name}</h3> :
+                                <h3>There are no diets associated with the recipe {recipeDetails.name}</h3> :
                                 !recipeDetails.diets ? 
                                 recipeDetails.Diets.map(diet=>{
                                     return (
                                         <div 
-                                        key={diet} 
+                                        key={diet.name} 
                                         className="diet-details">
-                                            {diet}
+                                            {diet.name}
                                         </div>
                                     )
                                 }) :
@@ -102,8 +127,16 @@ const RecipeDetails = () => {
                             {
                                 !recipeDetails.stepAStep ?
                                 <p className="not-found">There is not step by step for this recipe
-                                </p>
-                                :recipeDetails.stepAStep.map(step => {
+                                </p>:
+                                typeof recipeDetails.stepAStep === 'string' ? 
+                                recipeDetails.stepAStep.split(',').map(step => {
+                                    return(
+                                        <li key={step}>
+                                            {step}
+                                        </li>
+                                    )
+                                }):
+                                recipeDetails.stepAStep.map(step => {
                                     return(
                                         <li key={step}>
                                             {step}
@@ -118,8 +151,17 @@ const RecipeDetails = () => {
                         <ol>
                             {
                                 !recipeDetails.ingredients ?
-                                <p className="not-found">There are not ingredients for this recipe</p>
-                                :recipeDetails.ingredients.map(ingredient => {
+                                <p className="not-found">There are not ingredients for this recipe</p>:
+                                typeof recipeDetails.ingredients === 'string' ?
+                                recipeDetails.ingredients.split(',').map(ingredient => {
+                                    return (
+                                            <li key={ingredient}>
+                                                {ingredient}
+                                            </li>
+                                        )                                    
+                                    })
+                                :
+                                recipeDetails.ingredients.map(ingredient => {
                                     return ingredient.map(ing=>{
                                         return(
                                             <li key={ing}>
@@ -132,7 +174,8 @@ const RecipeDetails = () => {
                         </ol>
                     </div>
                 </div>
-            </div>
+                </div>
+            }
         </div>
     )
 }

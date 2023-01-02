@@ -10,7 +10,7 @@ const Paginate = ({recipesPerPage, totalRecipes, paginate}) => {
 
 
     return(
-        <div className="paginate-container">
+        <div className="btn-numbers-paginate">
             {   
                 pageNumbers.map(page => {
                     return <button

@@ -11,8 +11,8 @@ import './recipes.css';
 
 const Recipes = () => {
     const recipesPerPage = 9;
-    const recipesGlobal = useSelector(state => state.recipes);
-    const recipesLocal = recipesGlobal;
+    const recipes = useSelector(state => state.recipes);
+    const recipesFilter = useSelector(state => state.recipesFilter);
     const [currentPage, setCurrentPage] = useState(1);
     const dispatch = useDispatch();
 
@@ -21,14 +21,66 @@ const Recipes = () => {
     }, []);
     
     useEffect(()=>{
-        if (!recipesGlobal.length) {
+        if (!recipesFilter.length){
             loading();
         }
-    }, [recipesGlobal]);
+    }, [recipesFilter]);
+
+    // useEffect(()=>{
+    //     let $prevBtn = document.querySelector('button[name="prev"]');
+    //     let $nextBtn = document.querySelector('button[name="next"]');
+
+    //     if (currentPage !== 1){
+    //         $prevBtn.removeAttribute("disabled");
+    //         $prevBtn.classList.remove("disabled-btn");
+    //     }else{
+    //         if (!$prevBtn.classList.contains("disabled-btn")){
+    //             $prevBtn.setAttribute("disabled", true);
+    //             $prevBtn.classList.add("disabled-btn");
+    //         }
+    //     }
+
+    //     if (currentPage === Math.ceil(recipesFilter.length/recipesPerPage)) {
+    //         $nextBtn.setAttribute("disabled", true);
+    //         $nextBtn.classList.add("disabled-btn");
+    //     }else{
+    //         if ($nextBtn.classList.contains("disabled-btn")){
+    //             $nextBtn.removeAttribute("disabled");
+    //             $nextBtn.classList.remove("disabled-btn");
+    //         }
+    //     }
+
+    // }, [currentPage])
+
+    useEffect(()=>{
+        let $prevBtn = document.querySelector('button[name="prev"]');
+        let $nextBtn = document.querySelector('button[name="next"]');
+
+        if (currentPage === 1) {
+            $prevBtn.setAttribute("disabled", true);
+            $prevBtn.classList.add("disabled-btn");
+        }else{
+            if ($prevBtn.classList.contains("disabled-btn")) {
+                $prevBtn.removeAttribute("disabled");
+                $prevBtn.classList.remove("disabled-btn");
+            }
+        }
+        
+        if (currentPage === Math.ceil(recipesFilter.length/recipesPerPage)) {
+            $nextBtn.setAttribute("disabled", true);
+            $nextBtn.classList.add("disabled-btn");
+        }else{
+            if ($nextBtn.classList.contains("disabled-btn")) {
+                $nextBtn.removeAttribute("disabled");
+                $nextBtn.classList.remove("disabled-btn");
+            }
+        }
+
+    }, [currentPage])
 
     const indexLastRecipes = currentPage * recipesPerPage;
     const indexFirstRecipes = indexLastRecipes - recipesPerPage;
-    const currentRecipes = recipesLocal.slice(indexFirstRecipes, indexLastRecipes);
+    const currentRecipes = recipesFilter.slice(indexFirstRecipes, indexLastRecipes);
 
     function paginate(pageNumber){
         setCurrentPage(pageNumber)
@@ -44,6 +96,15 @@ const Recipes = () => {
             $error.classList.remove("none");
             $error.classList.add("visible");
         }, 7000);
+    }
+
+    function handleBtn(e){
+        console.log(currentPage);
+        if (e.target.name === "prev") {
+            setCurrentPage(currentPage - 1);
+        }else{
+            setCurrentPage(currentPage + 1);
+        }
     }
 
     return (
@@ -74,7 +135,18 @@ const Recipes = () => {
                 })
                 }
                 <div className="paginate-container">
-                    <Paginate recipesPerPage={recipesPerPage} totalRecipes = {recipesLocal.length} paginate = {paginate}/>
+                    <button 
+                    name="prev"
+                    className="btn-arrows btn-prev disabled-btn" 
+                    onClick={handleBtn}>🡠</button>
+                    <Paginate 
+                    recipesPerPage={recipesPerPage} 
+                    totalRecipes = {recipesFilter.length} 
+                    paginate = {paginate}/>
+                    <button 
+                    name="next"
+                    className="btn-arrows btn-next" 
+                    onClick={handleBtn}>🡢</button>
                 </div>
             </div>
             <SecundaryNav/>

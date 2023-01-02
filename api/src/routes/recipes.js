@@ -15,7 +15,7 @@ router.get("/", async (req, res)=>{
         res.send([...infoApi, ...infoDb]);
     }
     catch (error){
-        res.status(404).send({error});
+        res.status(404).send({error: error.message});
     }
     
 });

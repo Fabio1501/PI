@@ -17,6 +17,29 @@
 .bg-image .chef{
     width: 40%;
     margin-right: -40px;
+    filter: drop-shadow(0px 0px 20px var(--main-chef-color));
+    animation: chef 5s linear infinite;
+}
+
+@keyframes chef {
+    0%{
+        transform: translateY(-1%);
+    }
+    20%{
+        transform: translateY(1%);
+    }
+    40%{
+        transform: translateY(-1%);
+    }
+    60%{
+        transform: translateY(1%);
+    }
+    80%{
+        transform: translateY(-1%);
+    }
+    100%{
+        transform: translateY(1%);
+    }
 }
 
 .bg-black-color{
@@ -59,12 +82,45 @@
     border: 2px solid var(--main-chef-color);
     border-radius: 15px;
     margin-top: 20px;
+    animation: btn 5s linear infinite;
+}
+
+@keyframes btn {
+    0%{
+        transform: scale(1.03);
+        -webkit-box-shadow: 0 0 30px -10px var(--main-chef-color);
+        -moz-box-shadow: 0 0 30px -10px var(--main-chef-color);
+        box-shadow: 0 0 30px -10px var(--main-chef-color);
+    }
+    20%{
+        transform: scale(1);
+    }
+    40%{
+        transform: scale(1.03);
+        -webkit-box-shadow: 0 0 30px 0px var(--main-chef-color);
+        -moz-box-shadow: 0 0 30px 0px var(--main-chef-color);
+        box-shadow: 0 0 30px 0px var(--main-chef-color);
+    }
+    60%{
+        transform: scale(1);
+    }
+    80%{
+        transform: scale(1.03);
+    }
+    100%{
+        transform: scale(1);
+        -webkit-box-shadow: 0 0 18px 7.5px var(--main-chef-color);
+        -moz-box-shadow: 0 0 18px 7.5px var(--main-chef-color);
+        box-shadow: 0 0 18px 7.5px var(--main-chef-color);
+    }
 }
 
 .btn-home:hover{
     -webkit-box-shadow: 0 0 18px 7.5px var(--main-chef-color);
     -moz-box-shadow: 0 0 18px 7.5px var(--main-chef-color);
     box-shadow: 0 0 18px 7.5px var(--main-chef-color);
+    animation: none;
+    scale: 1.1;
 }
 
 .title-pp{

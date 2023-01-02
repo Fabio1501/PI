@@ -1,8 +1,6 @@
 import React, {useState} from "react";
 import { useDispatch } from 'react-redux';
 import IconSearch from "../../assets/IconSearch";
-// import iconSearch from '../../assets/icon search.svg';
-import iconSearch from '../../assets/IconSearch';
 import { getAllRecipes } from '../../redux/actions/index';
 import './searchbar.css'
 
@@ -16,7 +14,7 @@ const SearchBar = () => {
             className="search" 
             onSubmit={(e)=>{
                 e.preventDefault();
-                dispatch(getAllRecipes(nameRecipes))
+                dispatch(getAllRecipes(nameRecipes));
                 setNameRecipes('');
             }}>
                 <input 

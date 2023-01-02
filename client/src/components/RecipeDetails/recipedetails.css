@@ -59,12 +59,6 @@
     column-gap: .1em;
 }
 
-.container-icons .icons img{
-    width: 2.6em;
-    padding: 0px;
-    height: 2.6em;
-}
-
 .container-icons .icons .text-info{
     width: 150px;
 }
@@ -105,9 +99,10 @@
     border: 2px solid var(--main-first-color);
     border-radius: .6em;
     padding: 1em;
-    -webkit-box-shadow: 0 0 20px 5px var(--main-first-color);
-    -moz-box-shadow: 0 0 20px 5px var(--main-first-color);
-    box-shadow: 0 0 20px 5px var(--main-first-color);
+    -webkit-box-shadow: 1px 1px 10px 3px var(--main-first-color);
+    -moz-box-shadow: 1px 1px 10px 3px var(--main-first-color);
+    box-shadow: 1px 1px 10px 3px var(--main-first-color);
+    gap: 1em;
 }
 
 .steps-ingredients{

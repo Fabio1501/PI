@@ -32,8 +32,11 @@ module.exports = (sequelize) => {
       defaultValue: "Proximamente..."
     },
     img:{
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       defaultValue: "https://i.postimg.cc/Dy69FXBY/default-image-PI.png",
+      // validate : {
+      //   len: [1,10]
+      // }
     },
     readyInMinutes: {
       type: DataTypes.INTEGER,

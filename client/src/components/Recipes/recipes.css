@@ -85,3 +85,36 @@
 .loader-error .none{
     display: none;
 }
+
+.paginate-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 1em;
+    margin-top: 2em;
+}
+
+.disabled-btn{
+    cursor: not-allowed;
+}
+
+.btn-arrows{
+    color: var(--main-first-color);
+    font-size: 2em;
+    border: none;
+    padding: 0;
+} 
+
+.btn-prev:hover{
+    transform: translateX(-5px);
+}
+
+.btn-next:hover{
+    transform: translateX(5px);
+}
+
+.disabled-btn:hover{
+    transform: translateX(0px);
+}

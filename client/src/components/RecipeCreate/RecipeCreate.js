@@ -10,7 +10,7 @@ const RecipeCreate = () => {
     const [recipes, setRecipes] = useState({
         name: '',
         dishSummary: '',
-        img: 'https://i.postimg.cc/Dy69FXBY/default-image-PI.png',
+        img: '',
         readyInMinutes: 0,
         servings: 0,
         healthScore: 0,
@@ -133,16 +133,17 @@ const RecipeCreate = () => {
         if (!Object.entries(errors).length) {
             dispatch(createRecipe({...recipes, ingredients: recipes.ingredients.toString(), stepAStep: recipes.stepAStep.toString()}));
             setRecipes({
-                name: '',
-                dishSummary: '',
-                img: '',
-                readyInMinutes: 0,
-                servings: 0,
-                healthScore: 0,
-                stepAStep: [],
-                diets: [],
-                ingredients: []
-            })
+            name: '',
+            dishSummary: '',
+            img: '',
+            readyInMinutes: 0,
+            servings: 0,
+            healthScore: 0,
+            stepAStep: [],
+            diets: [],
+            ingredients: []
+        })
+            
             $button.setAttribute("disabled", true);
             $button.classList.add("disabled");
         }
@@ -274,9 +275,11 @@ const RecipeCreate = () => {
                                                     onChange={handleCheckbox} 
                                                     key={diet.name} 
                                                     value= {diet.name} 
-                                                    name='diets' 
+                                                    name='diets'
+                                                    className="check" 
                                                     id={diet.name} />
                                                     <label
+                                                    for = {diet.name}
                                                     key={`${diet.name}${diet.id}`} 
                                                     >{`${diet.name.charAt(0).toUpperCase()}${diet.name.slice(1)}`}</label>
                                                 </div>

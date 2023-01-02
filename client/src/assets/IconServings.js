@@ -6,13 +6,13 @@ function IconServings() {
       xmlns="http://www.w3.org/2000/svg"
       xmlnsSvgjs="http://svgjs.com/svgjs"
       xmlnsXlink="http://www.w3.org/1999/xlink"
-      width="40"
-      height="40"
+      width="30"
+      height="30"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width="40"
-        height="40"
+        width="30"
+        height="30"
         viewBox="0 0 48 48"
       >
         <path

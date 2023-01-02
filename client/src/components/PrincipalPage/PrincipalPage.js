@@ -7,13 +7,13 @@ import './principalpage.css';
 const PrincipalPage = () => {
     return (
         <div className="bg-image">
-                <img alt="meChef" className="chef" src={imagenChef}/>
-                <div className="container-intro">
-                    <img alt="logopp" src={logo}/>
-                    <h1 className="title-pp">PI food - Fabian Carabajal</h1>
-                    <h2 className="subtitle-pp">{`The healthiest food can also be the most delicious.`}</h2>
-                    <Link to = '/recipes' className="btn-home">GO TO HOME</Link>
-                </div>
+            <img alt="meChef" className="chef" src={imagenChef}/>
+            <div className="container-intro">
+                <img alt="logopp" src={logo}/>
+                <h1 className="title-pp">PI food - Fabian Carabajal</h1>
+                <h2 className="subtitle-pp">{`The healthiest food can also be the most delicious.`}</h2>
+                <Link to = '/recipes' className="btn-home">GO TO HOME</Link>
+            </div>
         </div>
     )
 }

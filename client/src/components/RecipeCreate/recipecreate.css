@@ -274,18 +274,6 @@ input[type="range"]::-webkit-slider-runnable-track {
     cursor: pointer;
 }
 
-.checkbox-wrapper{
-    width: 100%;
-    border: 2px solid var(--main-first-color);
-    border-radius: 7px;
-    padding: .5em 0px;
-}
-
-.checkbox-wrapper input{
-    width: 15px;
-    height: 15px;
-}
-
 .disabled{
     cursor: not-allowed;
 }
