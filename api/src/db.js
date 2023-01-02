@@ -3,7 +3,7 @@ const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const {
-  DB_USER, DB_PASSWORD, DB_HOST, API_KEY, DB_NAME, DB_PORT
+  DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DB_PORT
 } = process.env;
 // const dietFunction = require("./models/Diet")
 // const recipeFunction = require("./models/Recipe") 
