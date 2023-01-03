@@ -1,6 +1,6 @@
 .btn-numbers-paginate{
     display: flex;
-    column-gap: 1em;
+    column-gap: .5em;
 }
 
 .btn-pages{
@@ -28,4 +28,26 @@
     -webkit-box-shadow: 1px 1px 10px 3px var(--main-first-color);
     -moz-box-shadow: 1px 1px 10px 3px var(--main-first-color);
     box-shadow: 1px 1px 10px 3px var(--main-first-color);
+    animation: current 4s linear infinite;
+}
+
+@keyframes current{
+    0%{
+        transform: translateY(0%);
+    }
+    20%{
+        transform: translateY(1%);
+    }
+    40%{
+        transform: translateY(0%);
+    }
+    60%{
+        transform: translateY(1%);
+    }
+    80%{
+        transform: translateY(0%);
+    }
+    100%{
+        transform: translateY(1%);
+    }
 }

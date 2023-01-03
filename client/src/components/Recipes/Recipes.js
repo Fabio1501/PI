@@ -19,10 +19,6 @@ const Recipes = () => {
         dispatch(getAllRecipes());
     }, []);
 
-    useEffect(()=> {
-        setCurrentPage(1);
-    }, [dispatch])
-
     useEffect(()=>{
         if (!recipesFilter.length){
             loading();
@@ -63,7 +59,7 @@ const Recipes = () => {
         let $btns = document.querySelectorAll(".btn-pages");
 
         for (const btn of $btns) {
-            if (btn.id == currentPage) {
+            if (btn.id == pageNumber) {
                 btn.classList.add("btn-current");
             }else{
                 if (btn.classList.contains("btn-current")) {
@@ -71,6 +67,10 @@ const Recipes = () => {
                 }
             }
         }
+    }
+
+    function setCurrent(){
+        setCurrentPage(1)
     }
 
     function loading(){
@@ -136,7 +136,7 @@ const Recipes = () => {
                     onClick={handleBtn}>🡢</button>
                 </div>
             </div>
-            <SecundaryNav/>
+            <SecundaryNav setCurrent = {setCurrent}/>
         </div>
     )
 }
