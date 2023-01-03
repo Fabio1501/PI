@@ -8,7 +8,6 @@ const Paginate = ({recipesPerPage, totalRecipes, paginate}) => {
         pageNumbers.push(i);
     }
 
-
     return(
         <div className="btn-numbers-paginate">
             {   

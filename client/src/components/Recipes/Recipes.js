@@ -1,17 +1,16 @@
 import React, {useEffect, useState} from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import loader from '../../assets/loader food.gif';
-import errorReceta from '../../assets/error-recetas.webp'
+import { getAllRecipes } from '../../redux/actions/index';
 import Nav from '../Nav/Nav';
 import SecundaryNav from '../SecundaryNav/SecundaryNav';
 import Paginate from "../Paginate/Paginate";
 import RecipeCard from "../RecipeCard/RecipeCard";
-import { getAllRecipes } from '../../redux/actions/index';
+import loader from '../../assets/loader food.gif';
+import errorReceta from '../../assets/error-recetas.webp'
 import './recipes.css';
 
 const Recipes = () => {
     const recipesPerPage = 9;
-    const recipes = useSelector(state => state.recipes);
     const recipesFilter = useSelector(state => state.recipesFilter);
     const [currentPage, setCurrentPage] = useState(1);
     const dispatch = useDispatch();
@@ -19,43 +18,21 @@ const Recipes = () => {
     useEffect(()=>{
         dispatch(getAllRecipes());
     }, []);
-    
+
+    useEffect(()=> {
+        setCurrentPage(1);
+    }, [dispatch])
+
     useEffect(()=>{
         if (!recipesFilter.length){
             loading();
         }
     }, [recipesFilter]);
 
-    // useEffect(()=>{
-    //     let $prevBtn = document.querySelector('button[name="prev"]');
-    //     let $nextBtn = document.querySelector('button[name="next"]');
-
-    //     if (currentPage !== 1){
-    //         $prevBtn.removeAttribute("disabled");
-    //         $prevBtn.classList.remove("disabled-btn");
-    //     }else{
-    //         if (!$prevBtn.classList.contains("disabled-btn")){
-    //             $prevBtn.setAttribute("disabled", true);
-    //             $prevBtn.classList.add("disabled-btn");
-    //         }
-    //     }
-
-    //     if (currentPage === Math.ceil(recipesFilter.length/recipesPerPage)) {
-    //         $nextBtn.setAttribute("disabled", true);
-    //         $nextBtn.classList.add("disabled-btn");
-    //     }else{
-    //         if ($nextBtn.classList.contains("disabled-btn")){
-    //             $nextBtn.removeAttribute("disabled");
-    //             $nextBtn.classList.remove("disabled-btn");
-    //         }
-    //     }
-
-    // }, [currentPage])
-
     useEffect(()=>{
         let $prevBtn = document.querySelector('button[name="prev"]');
         let $nextBtn = document.querySelector('button[name="next"]');
-
+        
         if (currentPage === 1) {
             $prevBtn.setAttribute("disabled", true);
             $prevBtn.classList.add("disabled-btn");
@@ -75,15 +52,25 @@ const Recipes = () => {
                 $nextBtn.classList.remove("disabled-btn");
             }
         }
-
     }, [currentPage])
-
+    
     const indexLastRecipes = currentPage * recipesPerPage;
     const indexFirstRecipes = indexLastRecipes - recipesPerPage;
     const currentRecipes = recipesFilter.slice(indexFirstRecipes, indexLastRecipes);
-
+    
     function paginate(pageNumber){
-        setCurrentPage(pageNumber)
+        setCurrentPage(pageNumber);
+        let $btns = document.querySelectorAll(".btn-pages");
+
+        for (const btn of $btns) {
+            if (btn.id == currentPage) {
+                btn.classList.add("btn-current");
+            }else{
+                if (btn.classList.contains("btn-current")) {
+                    btn.classList.remove("btn-current");
+                }
+            }
+        }
     }
 
     function loading(){

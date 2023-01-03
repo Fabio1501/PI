@@ -22,3 +22,10 @@
     -moz-box-shadow: 1px 1px 10px 3px var(--main-first-color);
     box-shadow: 1px 1px 10px 3px var(--main-first-color);
 }
+
+.btn-current{
+    scale: 1.1;
+    -webkit-box-shadow: 1px 1px 10px 3px var(--main-first-color);
+    -moz-box-shadow: 1px 1px 10px 3px var(--main-first-color);
+    box-shadow: 1px 1px 10px 3px var(--main-first-color);
+}
