@@ -48,14 +48,7 @@ const Recipes = () => {
                 $nextBtn.classList.remove("disabled-btn");
             }
         }
-    }, [currentPage])
-    
-    const indexLastRecipes = currentPage * recipesPerPage;
-    const indexFirstRecipes = indexLastRecipes - recipesPerPage;
-    const currentRecipes = recipesFilter.slice(indexFirstRecipes, indexLastRecipes);
-    
-    function paginate(pageNumber){
-        setCurrentPage(pageNumber);
+
         let $btns = document.querySelectorAll(".btn-pages");
 
         for (const btn of $btns) {
@@ -67,6 +60,14 @@ const Recipes = () => {
                 }
             }
         }
+    }, [currentPage])
+    
+    const indexLastRecipes = currentPage * recipesPerPage;
+    const indexFirstRecipes = indexLastRecipes - recipesPerPage;
+    const currentRecipes = recipesFilter.slice(indexFirstRecipes, indexLastRecipes);
+    
+    function paginate(pageNumber){
+        setCurrentPage(pageNumber);
     }
 
     function loading(){

@@ -78,17 +78,18 @@ module.exports = {
         return filterApi;
     },
     getDataDb: async function(name){
-        let infoDb = await Recipe.findAll({
-            include: {
-                model: Diet,
-                attributes: ["name"],
-                through: {
-                    attributes: []
+        if (!name){
+            let infoDb = await Recipe.findAll({
+                include: {
+                    model: Diet,
+                    attributes: ["name"],
+                    through: {
+                        attributes: []
+                    }
                 }
-            }
-        });
-        
-        if (!name) return infoDb;
+            });
+            return infoDb;
+        } 
         
         let filterDb = await Recipe.findAll({
             where: {name},
