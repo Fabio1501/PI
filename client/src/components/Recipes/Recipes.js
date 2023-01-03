@@ -52,7 +52,7 @@ const Recipes = () => {
         let $btns = document.querySelectorAll(".btn-pages");
 
         for (const btn of $btns) {
-            if (btn.id == pageNumber) {
+            if (btn.id == currentPage) {
                 btn.classList.add("btn-current");
             }else{
                 if (btn.classList.contains("btn-current")) {
