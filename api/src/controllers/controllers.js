@@ -8,7 +8,8 @@ const {Recipe, Diet} = require("../db");
 
 async function getRecipesForIdApi(idApi){
     // url = `https://api.spoonacular.com/recipes/${idApi}/information?apiKey=${API_KEY}`
-    url = `https://api.spoonacular.com/recipes/${idApi}/information?apiKey=44a4d0c7b7564774918875cd3a176309`
+    // url = `https://api.spoonacular.com/recipes/${idApi}/information?apiKey=44a4d0c7b7564774918875cd3a176309`
+    url = `https://api.spoonacular.com/recipes/${idApi}/information?apiKey=fc313782a71b424b97eac7c98322ce79`
     let infoOneRecipe = await axios(url, {
         headers: {"Accept-Encoding": "gzip,deflate,compress"}
     });
@@ -51,7 +52,10 @@ module.exports = {
         // let allDataApi = await axios(`${url}&number=100`, {
         //     headers: {"Accept-Encoding": "gzip,deflate,compress"}
         // })
-        let allDataApi = await axios(`https://api.spoonacular.com/recipes/complexSearch?apiKey=44a4d0c7b7564774918875cd3a176309&addRecipeInformation=true&number=100`, {
+        // let allDataApi = await axios(`https://api.spoonacular.com/recipes/complexSearch?apiKey=44a4d0c7b7564774918875cd3a176309&addRecipeInformation=true&number=100`, {
+        //     headers: {"Accept-Encoding": "gzip,deflate,compress"}
+        // })
+        let allDataApi = await axios(`https://api.spoonacular.com/recipes/complexSearch?apiKey=fc313782a71b424b97eac7c98322ce79&addRecipeInformation=true&number=100`, {
             headers: {"Accept-Encoding": "gzip,deflate,compress"}
         })
         allDataApi = allDataApi.data.results;
