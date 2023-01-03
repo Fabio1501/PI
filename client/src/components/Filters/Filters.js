@@ -14,14 +14,13 @@ const Filters = ({setCurrentPage}) => {
         dispatch(getAllRecipes());
     }, []);
 
-    useEffect(()=>{
-        setCurrentPage(1);
-    }, [dispatch])
-
     return(
         <div className="filters-container">
             <select 
-            onChange={e => dispatch(filterDb(e.target.value, recipesFilter))}
+            onChange={e => {
+                dispatch(filterDb(e.target.value, recipesFilter))
+                setCurrentPage(1);
+            }}
             className = 'dropdown' 
             name="recipes-all" 
             id="recipes-all-select">
@@ -33,7 +32,10 @@ const Filters = ({setCurrentPage}) => {
             className = 'dropdown' 
             name="recipes-alphabetical" 
             id="recipes-alphabetical-select"
-            onChange={e => dispatch(filterAlphabetical(e.target.value, recipesFilter))}>
+            onChange={e => {
+                dispatch(filterAlphabetical(e.target.value, recipesFilter))
+                setCurrentPage(1);
+            }}>
                 <option value="">Alphabetical</option>
                 <option value="A-Z">A - Z</option>
                 <option value="Z-A">Z - A</option>
@@ -42,7 +44,10 @@ const Filters = ({setCurrentPage}) => {
             className = 'dropdown' 
             name="recipes-diets" 
             id="recipes-diets-select"
-            onChange={e => dispatch(filterDiets(e.target.value, recipes))}>
+            onChange={e => {
+                dispatch(filterDiets(e.target.value, recipes))
+                setCurrentPage(1);
+            }}>
                 <option value="">Diets</option>
                 {
                     diets.map(diet=>{
@@ -56,7 +61,10 @@ const Filters = ({setCurrentPage}) => {
             className = 'dropdown' 
             name="recipes-health"
             id="recipes-health-select"
-            onChange={e => dispatch(filterHealth(e.target.value, recipesFilter))}>
+            onChange={e =>{
+                dispatch(filterHealth(e.target.value, recipesFilter))
+                setCurrentPage(1);
+            }}>
                 <option value="">Health Score</option>
                 <option value="menor-mayor">Minor to major</option>
                 <option value="mayor-menor">Major to minor</option>

@@ -23,7 +23,6 @@ const Recipes = () => {
         if (!recipesFilter.length){
             loading();
         }
-        setCurrentPage(1);
     }, [recipesFilter]);
 
     useEffect(()=>{
