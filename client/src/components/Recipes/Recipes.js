@@ -65,7 +65,7 @@ const Recipes = () => {
     const indexLastRecipes = currentPage * recipesPerPage;
     const indexFirstRecipes = indexLastRecipes - recipesPerPage;
     const currentRecipes = recipesFilter.slice(indexFirstRecipes, indexLastRecipes);
-    
+    console.log(currentPage);
     function paginate(pageNumber){
         setCurrentPage(pageNumber);
     }
