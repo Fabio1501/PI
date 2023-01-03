@@ -29,6 +29,7 @@ const Recipes = () => {
     useEffect(()=>{
         let $prevBtn = document.querySelector('button[name="prev"]');
         let $nextBtn = document.querySelector('button[name="next"]');
+        console.log(currentPage);
         
         if (currentPage === 1) {
             $prevBtn.setAttribute("disabled", true);
@@ -66,7 +67,6 @@ const Recipes = () => {
     const indexLastRecipes = currentPage * recipesPerPage;
     const indexFirstRecipes = indexLastRecipes - recipesPerPage;
     const currentRecipes = recipesFilter.slice(indexFirstRecipes, indexLastRecipes);
-    console.log(currentPage);
     function paginate(pageNumber){
         setCurrentPage(pageNumber);
     }
