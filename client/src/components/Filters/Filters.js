@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { filterAlphabetical, filterDb, filterDiets, filterHealth, getAllDiets, getAllRecipes } from "../../redux/actions";
 import './filters.css';
 
-const Filters = ({setCurrent}) => {
+const Filters = ({setCurrentPage}) => {
     const recipes = useSelector(state => state.recipes);
     const recipesFilter = useSelector(state => state.recipesFilter);
     const diets = useSelector(state => state.diets);
@@ -15,7 +15,7 @@ const Filters = ({setCurrent}) => {
     }, []);
 
     useEffect(()=>{
-        setCurrent();
+        setCurrentPage(1);
     }, [dispatch])
 
     return(

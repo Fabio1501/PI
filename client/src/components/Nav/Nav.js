@@ -19,7 +19,7 @@ export function hiddenSearch(){
     }
 }
 
-const Nav = () => {
+const Nav = ({setCurrentPage}) => {
 
     useEffect(()=>{
         hiddenSearch();
@@ -30,7 +30,7 @@ const Nav = () => {
             <Link to = '/' className="logo"> 
                 <img alt="logo" src={logoPrueba}/>
             </Link>
-            <SearchBar />
+            <SearchBar setCurrentPage = {setCurrentPage}/>
             <div className="links">
                 <Link to = '/recipes' 
                     className="link link-home"

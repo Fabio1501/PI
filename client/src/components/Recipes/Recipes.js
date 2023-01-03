@@ -69,10 +69,6 @@ const Recipes = () => {
         }
     }
 
-    function setCurrent(){
-        setCurrentPage(1)
-    }
-
     function loading(){
         const $loader = document.querySelector('.cards-container .loader-error .visible');
         const $error = document.querySelector('.cards-container .loader-error .none');
@@ -96,7 +92,7 @@ const Recipes = () => {
 
     return (
         <div className="recipes-container scrollbar" id="style-3">
-            <Nav />
+            <Nav setCurrentPage = {setCurrentPage}/>
             <div className="cards-container">
                 {   
                 !currentRecipes.length ? 
@@ -136,7 +132,7 @@ const Recipes = () => {
                     onClick={handleBtn}>🡢</button>
                 </div>
             </div>
-            <SecundaryNav setCurrent = {setCurrent}/>
+            <SecundaryNav setCurrentPage = {setCurrentPage}/>
         </div>
     )
 }

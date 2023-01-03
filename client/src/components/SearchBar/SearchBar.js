@@ -4,7 +4,7 @@ import IconSearch from "../../assets/IconSearch";
 import { getAllRecipes } from '../../redux/actions/index';
 import './searchbar.css'
 
-const SearchBar = () => {
+const SearchBar = ({setCurrentPage}) => {
     const [nameRecipes, setNameRecipes] = useState('');
     const dispatch = useDispatch();
 
@@ -16,6 +16,7 @@ const SearchBar = () => {
                 e.preventDefault();
                 dispatch(getAllRecipes(nameRecipes));
                 setNameRecipes('');
+                setCurrentPage(1);
             }}>
                 <input 
                 type="text" 
