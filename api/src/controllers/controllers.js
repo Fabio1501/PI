@@ -164,6 +164,12 @@ module.exports = {
             aggregateLikes
         } = body
 
+        let recipeInDb = await Recipe.findOne({where: name})
+
+        if (recipeInDb) {
+            throw new Error({error: "Ya existe la receta"})
+        }
+
         if (!name || !dishSummary || !diets) {
             throw new Error({error: "Faltan datos requeridos"})
         }

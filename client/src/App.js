@@ -6,8 +6,8 @@ import Recipes from './components/Recipes/Recipes'
 import RecipeDetails from './components/RecipeDetails/RecipeDetails'
 import RecipeCreate from './components/RecipeCreate/RecipeCreate'
 import axios from 'axios';
-axios.defaults.baseURL = 'https://pi-production.up.railway.app/';
-// axios.defaults.baseURL = 'http://localhost:3001';
+axios.defaults.baseURL = '';
+// axios.defaults.baseURL = 'htthttps://pi-production.up.railway.app/p://localhost:3001';
 
 function App(){
   return (

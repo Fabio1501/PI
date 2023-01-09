@@ -152,6 +152,11 @@ export const createRecipe = (recipe) => async () => {
     }catch (error) {
         $loader.classList.add("none");
         $response.classList.remove("none");
+
+        if (error.message === "Ya existe la receta") {
+            $response.innerHTML = "Ya existe la receta";    
+        }
+
         if (!error) {
             $response.innerHTML = 'An error occurred while sending, try again.';    
         }
@@ -165,5 +170,4 @@ export const createRecipe = (recipe) => async () => {
             $response.innerHTML = "";
         }, 3000)
     }
-
 }
