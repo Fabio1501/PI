@@ -7,7 +7,7 @@ import RecipeDetails from './components/RecipeDetails/RecipeDetails'
 import RecipeCreate from './components/RecipeCreate/RecipeCreate'
 import axios from 'axios';
 // axios.defaults.baseURL = '';
-axios.defaults.baseURL = 'https://pi-production.up.railway.app/';
+axios.defaults.baseURL = 'https://proyectoindividualfabian.up.railway.app/';
 
 function App(){
   return (
